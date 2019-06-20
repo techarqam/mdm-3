@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">Sign Up as ALO Vendor</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <form [formGroup]="this.authService.signUp">
+
+              <ion-item>
+                <ion-label position="floating">Store Name</ion-label>
+                <ion-input type="text" formControlName="storeName"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Owner Name</ion-label>
+                <ion-input type="text" formControlName="ownerName"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Phone Number</ion-label>
+                <ion-input type="number" formControlName="phonenumber"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Store Category</ion-label>
+                <ion-input type="text" formControlName="storeCategory"></ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="pass"></ion-input>
+              </ion-item>
+
+
+              <ion-button class="margin-top" (click)="onSubmit()">Register</ion-button>
+            </form>
+
+            <ion-item>
+              <ion-button fill="clear" href="/login">Login as a Vendor</ion-button>
+            </ion-item>
+
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

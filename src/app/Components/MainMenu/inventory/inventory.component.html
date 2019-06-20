@@ -1,0 +1,9 @@
+<app-menu-header></app-menu-header>
+
+<ion-content>
+
+    <app-loader *ngIf="loader"></app-loader>
+    <p *ngFor="let p of products">
+        {{p.payload.doc.data().name}}
+    </p>
+</ion-content>

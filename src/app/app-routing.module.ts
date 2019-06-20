@@ -1,20 +1,61 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './Components/MainMenu/dashboard/dashboard.component';
+import { HelpComponent } from './Components/MainMenu/help/help.component';
+import { InventoryComponent } from './Components/MainMenu/inventory/inventory.component';
+import { OrdersComponent } from './Components/MainMenu/orders/orders.component';
+import { ProfileComponent } from './Components/MainMenu/profile/profile.component';
+import { SalesComponent } from './Components/MainMenu/sales/sales.component';
+import { LoginComponent } from './Components/Auth/login/login.component';
+import { SignUpComponent } from './Components/Auth/sign-up/sign-up.component';
+import { AddProductComponent } from './Components/Product/add-product/add-product.component';
+import { AuthGuard } from './Guards/Auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'dashboard',
+    component: DashboardComponent,
+    // canActivate: [AuthGuard]
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    path: 'help',
+    component: HelpComponent
+  },
+  {
+    path: 'inventory',
+    component: InventoryComponent
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'sales',
+    component: SalesComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
+  },
+  {
+    path: 'add-product',
+    component: AddProductComponent,
   }
+
 ];
 
 @NgModule({
@@ -23,4 +64,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
