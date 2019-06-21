@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../Services/Auth/auth.service';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
-import { Router } from '@angular/router';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,9 +14,10 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     public menuCtrl: MenuController,
     public commonService: CommonService,
-    public router: Router,
+    public navCtrl: NavController,
   ) {
     this.menuCtrl.enable(false);
+
   }
 
   ngOnInit() { }
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.commonService.presentToast(err.message);
     }).then(() => {
       if (this.authService.isLoggedIn()) {
-        this.router.navigateByUrl('/dashboard');
+        this.navCtrl.navigateRoot('/dashboard');
       }
     });
   }

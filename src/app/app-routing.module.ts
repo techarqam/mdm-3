@@ -10,6 +10,7 @@ import { LoginComponent } from './Components/Auth/login/login.component';
 import { SignUpComponent } from './Components/Auth/sign-up/sign-up.component';
 import { AddProductComponent } from './Components/Product/add-product/add-product.component';
 import { AuthGuard } from './Guards/Auth/auth.guard';
+import { NegAuthGuard } from './Guards/Auth/neg-auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'help',
@@ -45,11 +46,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [NegAuthGuard]
   },
   {
     path: 'sign-up',
-    component: SignUpComponent
+    component: SignUpComponent,
+    canActivate: [NegAuthGuard]
   },
   {
     path: 'add-product',

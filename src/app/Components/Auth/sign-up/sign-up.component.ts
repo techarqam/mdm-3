@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../Services/Auth/auth.service';
-import { MenuController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { MenuController, NavController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
 
 @Component({
@@ -15,12 +14,14 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService,
     public menuCtrl: MenuController,
     public commonService: CommonService,
-    public router: Router,
+    public navCtrl: NavController,
   ) {
     this.menuCtrl.enable(false);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (!this.authService.isLoggedIn()) { this.navCtrl.navigateRoot('/dashboard') }
+  }
 
 
 
@@ -32,7 +33,7 @@ export class SignUpComponent implements OnInit {
       this.commonService.presentToast(err.message);
     }).then(() => {
       if (this.authService.isLoggedIn()) {
-        this.router.navigateByUrl('/dashboard');
+        this.navCtrl.navigateRoot('/dashboard');
       }
     });
   }

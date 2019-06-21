@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-
-import { Platform, AlertController } from '@ionic/angular';
+import { Platform, AlertController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './Services/Auth/auth.service';
 import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -51,8 +49,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private authService: AuthService,
     public alertController: AlertController,
-    private router: Router,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public navCtrl: NavController,
   ) {
     this.initializeApp();
   }
@@ -94,7 +92,7 @@ export class AppComponent {
           text: "I'm Sure",
           handler: () => {
             this.authService.logout().then(() => {
-              this.router.navigateByUrl('/login');
+              this.navCtrl.navigateRoot('login');
             })
           }
         }
