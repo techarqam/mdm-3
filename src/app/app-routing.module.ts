@@ -26,23 +26,28 @@ const routes: Routes = [
   },
   {
     path: 'help',
-    component: HelpComponent
+    component: HelpComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'inventory',
-    component: InventoryComponent
+    component: InventoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'orders',
-    component: OrdersComponent
+    component: OrdersComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sales',
-    component: SalesComponent
+    component: SalesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -57,6 +62,7 @@ const routes: Routes = [
   {
     path: 'add-product',
     component: AddProductComponent,
+    canActivate: [AuthGuard]
   }
 
 ];

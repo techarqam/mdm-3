@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-menu-header',
@@ -7,8 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuHeaderComponent implements OnInit {
 
-  constructor() { }
+  store;
+  unVerified: boolean = false;
 
-  ngOnInit() {}
+  constructor(
+    public authService: AuthService,
+  ) { }
+
+  ngOnInit() {
+    this.getStore()
+  }
+
+  getStore() {
+    this.authService.getProfile().subscribe(snap => {
+      this.store = snap.payload.data();
+      this.store.id = snap.payload.id;
+      if (this.store.Status == "Unverified") {
+        this.unVerified = true;
+      }
+      console.log(this.store)
+    });
+  }
 
 }

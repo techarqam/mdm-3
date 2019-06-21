@@ -1,5 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-item color="danger" *ngIf="unVerified">
+    <p slot=start>You are not a verified Seller</p>
+    <ion-button (click)="unVerified = false" color="light" slot="end" fill="clear" size="small">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>

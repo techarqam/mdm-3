@@ -1,3 +1,50 @@
-<p>
-  profile works!
-</p>
+<ion-content>
+  <!-- <app-loader *ngIf="" -->
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Store Name</h3>
+        <h3 slot="end">{{this.store.storeName}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Owner Name</h3>
+        <h3 slot="end">{{this.store.ownerName}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Phone Number</h3>
+        <h3 slot="end">{{this.store.PhoneNumber}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Store Category</h3>
+        <h3 slot="end">{{this.store.StoreCategory}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Store Location</h3>
+        <h3 slot="end">{{this.store.StoreLocation}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Email</h3>
+        <h3 slot="end">{{this.store.email}}</h3>
+      </ion-item>
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Status</h3>
+        <h3 slot="end">{{this.store.Status}}</h3>
+      </ion-item>
+
+
+      <ion-item>
+        <h3 ion-text color="primary" slot="start">Created Date</h3>
+        <h3 slot="end">{{this.store.timestamp | date : 'medium'}}</h3>
+      </ion-item>
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

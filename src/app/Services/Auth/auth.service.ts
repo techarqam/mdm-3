@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { first } from 'rxjs/operators';
 import * as moment from 'moment';
+import * as firebase from 'firebase';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class AuthService {
     Status: new FormControl("Unverified"),
     email: new FormControl(""),
     pass: new FormControl(""),
+    // bannerImage: new FormControl(""),
     timeStamp: new FormControl(moment().format())
   });
 
@@ -31,7 +34,8 @@ export class AuthService {
   constructor(
     private fireAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-  ) { }
+  ) {
+  }
 
 
   isLoggedIn() {
@@ -61,5 +65,9 @@ export class AuthService {
 
   logout() {
     return this.fireAuth.auth.signOut();
+  }
+
+  getProfile() {
+    return this.firestore.doc(`Sellers/${firebase.auth().currentUser.uid}`).snapshotChanges();
   }
 }

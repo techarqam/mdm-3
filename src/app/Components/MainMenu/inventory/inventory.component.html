@@ -2,8 +2,8 @@
 
 <ion-content>
 
-    <app-loader *ngIf="loader"></app-loader>
-    <p *ngFor="let p of products">
+    <app-loader *ngIf="showLoader"></app-loader>
+    <p *ngFor="let p of products | async">
         {{p.payload.doc.data().name}}
     </p>
 </ion-content>

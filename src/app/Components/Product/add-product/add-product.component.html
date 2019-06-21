@@ -13,10 +13,42 @@
                 <ion-input type="text" formControlName="name"></ion-input>
               </ion-item>
 
+              <app-loader *ngIf="showLoader"></app-loader>
+
+              <ion-item>
+                <ion-label position="floating">Category</ion-label>
+                <ion-select formControlName="category" (ionChange)="getSubCat(this.prodService.product.value.category)">
+                  <ion-select-option [value]="c.payload.doc.id" *ngFor="let c of cats | async">{{c.payload.doc.data().name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item *ngIf="this.prodService.product.value.category">
+                <ion-label position="floating">Sub Category</ion-label>
+                <ion-select formControlName="subCategory">
+                  <ion-select-option [value]="s.payload.doc.id" *ngFor="let s of subCats | async">{{s.payload.doc.data().name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+
 
               <ion-item>
                 <ion-label position="floating">Brand Name</ion-label>
                 <ion-input type="text" formControlName="brandName"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Quantity</ion-label>
+                <ion-input type="text" formControlName="quantity"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Price</ion-label>
+                <ion-input type="text" formControlName="price"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-textarea formControlName="description"></ion-textarea>
               </ion-item>
 
               <ion-button (click)="addProduct()" size="block">Add Product</ion-button>

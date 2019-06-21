@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/Services/product/product.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-add-product',
@@ -8,13 +10,19 @@ import { ProductService } from 'src/app/Services/product/product.service';
 })
 export class AddProductComponent implements OnInit {
 
+  cats: Observable<any>;
+  subCats: Observable<any>;
+  showLoader: boolean = true;
+
   constructor(
     private prodService: ProductService,
+    public authService: AuthService,
   ) { }
 
-  ngOnInit() { }
-
-
+  ngOnInit() {
+    this.getCategories();
+    this.authService.getProfile();
+  }
 
 
 
@@ -26,4 +34,17 @@ export class AddProductComponent implements OnInit {
       console.log(res);
     });
   }
+
+  getCategories() {
+    this.cats = this.prodService.getCategories();
+    this.cats.subscribe(() => { this.showLoader = false });
+  }
+
+  getSubCat(cat) {
+    this.showLoader = true;
+    this.subCats = this.prodService.getSubCategories(cat);
+    this.subCats.subscribe(() => { this.showLoader = false });
+  }
+
+
 }

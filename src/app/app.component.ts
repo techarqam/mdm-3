@@ -43,7 +43,6 @@ export class AppComponent {
     },
 
   ];
-  userId: string = '';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -57,23 +56,12 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.getuser();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  getuser() {
-    this.authService.isLoggedIn().pipe(
-      tap(user => {
-        if (user) {
-          this.userId = user.uid;
-          console.log(user.uid);
-        }
-      })
-    )
-      .subscribe()
-  }
+
 
 
 
