@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { AuthService } from '../Auth/auth.service';
+import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,21 +11,41 @@ export class ProductService {
   store;
 
   product = new FormGroup({
-    name: new FormControl(""),
-    category: new FormControl(""),
-    subCategory: new FormControl(""),
-    brandName: new FormControl(""),
+    name: new FormControl("", Validators.compose([
+      Validators.required,
+      Validators.minLength(6)
+    ])),
+    category: new FormControl("", Validators.compose([
+      Validators.required,
+    ])),
+    subCategory: new FormControl("", Validators.compose([
+      Validators.required,
+    ])),
+    brandName: new FormControl("", Validators.compose([
+      Validators.required,
+    ])),
     status: new FormControl("Pending"),
-    quantity: new FormControl(1),
+    quantity: new FormControl(1, Validators.compose([
+      Validators.required,
+      Validators.min(1)
+    ])),
     sales: new FormControl(0),
-    price: new FormControl(0),
-    description: new FormControl(""),
+    price: new FormControl(1, Validators.compose([
+      Validators.required,
+      Validators.min(1)
+    ])),
+    description: new FormControl("", Validators.compose([
+      Validators.required,
+    ])),
     timestamp: new FormControl(moment().format()),
     storeId: new FormControl(""),
     storeName: new FormControl(""),
     // Images
   })
 
+  category = new FormGroup({
+    name: new FormControl("")
+  });
   mdm: string = "Products"
 
   constructor(
@@ -54,7 +75,11 @@ export class ProductService {
 
 
   getColl() {
-    return this.fs.collection(this.mdm).snapshotChanges()
+    return this.fs.collection(this.mdm, ref => ref.where("storeId", "==", firebase.auth().currentUser.uid)).snapshotChanges()
+  }
+
+  getCollbyCat(catId) {
+    return this.fs.collection(this.mdm, ref => ref.where("storeId", "==", firebase.auth().currentUser.uid).where("category", "==", catId)).snapshotChanges()
   }
 
   deleteDoc(id) {

@@ -6,16 +6,3 @@
     transition: .5s ease;
     opacity: 0;
 }
-
-img {
-    margin: 20px;
-}
-
-
-.item:hover .imgView {
-    opacity: 0.3;
-}
-
-.item:hover .editBtns {
-    opacity: 1;
-}

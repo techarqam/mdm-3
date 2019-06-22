@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../Services/Auth/auth.service';
+import { NavController, ModalController } from '@ionic/angular';
+import { EditBannerComponent } from '../../Profile/edit-banner/edit-banner.component';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -27,4 +31,10 @@ export class ProfileComponent implements OnInit {
     // this.products.subscribe(() => { this.showLoader = false });
   }
 
+  async editBanner() {
+    const modal = await this.modalCtrl.create({
+      component: EditBannerComponent,
+    });
+    return await modal.present();
+  }
 }

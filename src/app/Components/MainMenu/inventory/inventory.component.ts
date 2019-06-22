@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/Services/product/product.service';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../../Services/Auth/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inventory',
@@ -11,31 +11,50 @@ import { AuthService } from '../../../Services/Auth/auth.service';
 export class InventoryComponent implements OnInit {
 
   products: Observable<any>;
-  loader: boolean = true;
+  cats: Observable<any>;
   showLoader: boolean = true;
-  store;
 
   constructor(
     private prodService: ProductService,
-    private authService: AuthService,
+    private navCtrl: NavController,
   ) {
     this.getProducts();
-    this.getStore();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getCategories();
+  }
 
 
   getProducts() {
+    this.showLoader = true;
     this.products = this.prodService.getColl();
     this.products.subscribe(() => { this.showLoader = false });
   }
-  getStore() {
-    this.authService.getProfile().subscribe(snap => {
-      this.store = snap.payload.data();
-      this.store.id = snap.payload.id;
-    });
-
+  getCategories() {
+    this.showLoader = true;
+    this.cats = this.prodService.getCategories();
+    this.cats.subscribe(() => { this.showLoader = false });
   }
 
+  filterProd(catId) {
+    if (catId) {
+      this.getProductsbyCat(catId);
+    } else {
+      this.getProducts();
+    }
+  }
+
+
+  getProductsbyCat(catId) {
+    this.showLoader = true;
+    this.products = this.prodService.getCollbyCat(catId);
+    this.products.subscribe(() => { this.showLoader = false });
+  }
+
+
+
+  gtAddProduct() {
+    this.navCtrl.navigateForward(`/add-product`);
+  }
 }

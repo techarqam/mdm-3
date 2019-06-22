@@ -11,6 +11,7 @@ import { SignUpComponent } from './Components/Auth/sign-up/sign-up.component';
 import { AddProductComponent } from './Components/Product/add-product/add-product.component';
 import { AuthGuard } from './Guards/Auth/auth.guard';
 import { NegAuthGuard } from './Guards/Auth/neg-auth.guard';
+import { NotificationComponent } from './Components/notifications/notification/notification.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'add-product',
     component: AddProductComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'notifications',
+    component: NotificationComponent,
     canActivate: [AuthGuard]
   }
 

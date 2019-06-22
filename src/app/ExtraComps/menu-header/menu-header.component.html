@@ -9,6 +9,18 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+
+      <!-- <ion-button fill=clear (click)="presentPopover($ev)">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button> -->
+
+      <ion-button shape="round" (click)="presentNotifications($ev)">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge fill=clear slot="end">2</ion-badge>
+      </ion-button>
+
+    </ion-buttons>
     <ion-title>
       Home
     </ion-title>

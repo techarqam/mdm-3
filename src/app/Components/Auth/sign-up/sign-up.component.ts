@@ -10,6 +10,10 @@ import { CommonService } from '../../../Services/Common/common.service';
 })
 export class SignUpComponent implements OnInit {
 
+  img1: any;
+  img2: any;
+
+
   constructor(
     private authService: AuthService,
     public menuCtrl: MenuController,
@@ -20,14 +24,13 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) { this.navCtrl.navigateRoot('/dashboard') }
   }
 
 
 
   onSubmit() {
     let data = this.authService.signUp.value;
-    this.authService.signUpM(data).then(res => {
+    this.authService.signUpM(data, this.img2).then(res => {
       this.authService.signUp.reset();
     }).catch(err => {
       this.commonService.presentToast(err.message);
@@ -36,6 +39,25 @@ export class SignUpComponent implements OnInit {
         this.navCtrl.navigateRoot('/dashboard');
       }
     });
+  }
+
+
+  fileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.img1 = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    let fileList: FileList = event.target.files;
+    let file: File = fileList[0];
+    this.img2 = file;
+  }
+
+
+  removeImage() {
+    this.img1 = null;
   }
 
 }

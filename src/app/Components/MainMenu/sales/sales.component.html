@@ -1,3 +1,23 @@
-<p>
-  sales works!
-</p>
+<app-menu-header></app-menu-header>
+
+<ion-content>
+
+
+  <form [formGroup]="this.prodService.category">
+    <ion-item>
+      <ion-label position="floating">Category</ion-label>
+      <ion-select formControlName="name" (ionChange)="filterProd(this.prodService.category.value.name)">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option [value]="c.payload.doc.id" *ngFor="let c of cats | async">{{c.payload.doc.data().name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <app-loader *ngIf="showLoader"></app-loader>
+  <p *ngFor="let p of products | async">
+    {{p.payload.doc.data().name}}
+  </p>
+
+
+
+</ion-content>

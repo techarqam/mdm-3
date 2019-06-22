@@ -27,6 +27,13 @@ import { BackHeaderComponent } from './ExtraComps/back-header/back-header.compon
 import { LoaderComponent } from './ExtraComps/loader/loader.component';
 import { AddProductComponent } from './Components/Product/add-product/add-product.component';
 import { ProductService } from './Services/product/product.service';
+import { NotificationPopComponent } from './Components/notifications/notification-pop/notification-pop.component';
+import { NotificationComponent } from './Components/notifications/notification/notification.component';
+import { NotificationsService } from './Services/Notifications/notifications.service';
+import { OrdersService } from './Services/Orders/orders.service';
+import { SalesService } from './Services/Sales/sales.service';
+import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
+import { ProfileService } from './Services/Profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -43,11 +50,16 @@ import { ProductService } from './Services/product/product.service';
     BackHeaderComponent,
     LoaderComponent,
     AddProductComponent,
+    NotificationComponent,
+    NotificationPopComponent,
+    EditBannerComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
     BackHeaderComponent,
     LoaderComponent,
+    NotificationPopComponent,
+    EditBannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +76,10 @@ import { ProductService } from './Services/product/product.service';
     AuthService,
     CommonService,
     ProductService,
-
+    NotificationsService,
+    OrdersService,
+    SalesService,
+    ProfileService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

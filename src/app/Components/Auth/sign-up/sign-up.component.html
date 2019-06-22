@@ -41,8 +41,25 @@
                 <ion-input type="password" formControlName="pass"></ion-input>
               </ion-item>
 
+              <ion-item *ngIf="!img1">
+                <ion-label position="floating">Select Image</ion-label>
+                <ion-input type="file" (change)="fileChange($event)" class="select" accept="image/x-png,image/gif,image/jpeg" id="file-input"
+                  style="opacity: 0" #fileInp></ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="img1">
+                <img [src]="img1" class="imgView margin" />
+                <div class="editBtns">
+                  <ion-button class="btnTrash" color="danger" (click)="removeImage()">
+                    Remove
+                  </ion-button>
+                </div>
+              </ion-item>
 
               <ion-button class="margin-top" (click)="onSubmit()">Register</ion-button>
+
+
+
             </form>
 
             <ion-item>

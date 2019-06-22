@@ -1,0 +1,19 @@
+.banner {
+    width: 98%;
+    height: 200px;
+    overflow: hidden;
+    background-color: black;
+}
+
+.banner>img {
+    position: relative;
+    width: 100%;
+}
+
+.editBtns {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+}
