@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { firebaseConfig } from './firebaseConfig';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -36,6 +37,7 @@ import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banne
 import { ProfileService } from './Services/Profile/profile.service';
 import { SettingsComponent } from './ExtraComps/settings/settings.component';
 import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
+import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { EditProductComponent } from './Components/Product/edit-product/edit-pro
     EditBannerComponent,
     SettingsComponent,
     EditProductComponent,
+    BarcodeComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -73,6 +76,7 @@ import { EditProductComponent } from './Components/Product/edit-product/edit-pro
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    NgxQRCodeModule,
   ],
   providers: [
     StatusBar,

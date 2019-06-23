@@ -92,6 +92,10 @@ export class ProductService {
       .delete();
   }
 
+  getLimitedProducts(lim) {
+    return this.fs.collection(this.mdm, ref => ref.where("storeId", "==", firebase.auth().currentUser.uid).limit(lim).orderBy("sales", "desc")).snapshotChanges()
+  }
+
 
   getProduct(id) {
     return this.fs.doc(`Products/${id}`).snapshotChanges();
@@ -120,8 +124,10 @@ export class ProductService {
     if (quantity > 0) {
       if (product.quantity > quantity) {
         let fQuan: Number = Number(product.quantity) - Number(quantity);
+        let fSales: Number = Number(product.sales) + Number(quantity);
+
         return this.fs.collection("Products").doc(product.id)
-          .set({ quantity: fQuan }, { merge: true }).then(() => {
+          .set({ quantity: fQuan, sales: fSales }, { merge: true }).then(() => {
             this.commonService.presentToast("Product Sold")
           });
       } else {

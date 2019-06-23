@@ -15,6 +15,7 @@ import { NotificationComponent } from './Components/notifications/notification/n
 import { SettingsComponent } from './ExtraComps/settings/settings.component';
 import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
 import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
+import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'edit-product/:id',
     component: EditProductComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'product/barcode/:id',
+    component: BarcodeComponent,
     canActivate: [AuthGuard]
   },
   {

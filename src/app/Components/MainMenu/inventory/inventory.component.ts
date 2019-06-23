@@ -132,8 +132,9 @@ export class InventoryComponent implements OnInit {
 
 
   editProduct(id) {
-    console.log(id)
     this.navCtrl.navigateForward(`/edit-product/${id}`)
   }
-
+  viewBarcode(id) {
+    this.navCtrl.navigateForward(`/product/barcode/${id}`)
+  }
 }
