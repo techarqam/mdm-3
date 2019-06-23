@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { AuthService } from '../Auth/auth.service';
 import * as firebase from 'firebase';
+import { CommonService } from '../Common/common.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,7 @@ export class ProductService {
   store;
 
   product = new FormGroup({
+    id: new FormControl(""),
     name: new FormControl("", Validators.compose([
       Validators.required,
       Validators.minLength(6)
@@ -50,7 +52,8 @@ export class ProductService {
 
   constructor(
     private fs: AngularFirestore,
-    public authService: AuthService
+    public authService: AuthService,
+    public commonService: CommonService,
   ) {
     this.getStore();
   }
@@ -90,12 +93,8 @@ export class ProductService {
   }
 
 
-  getDoc(id) {
-    return this.fs
-      .collection(this.mdm)
-      .doc(id)
-      .snapshotChanges();
-
+  getProduct(id) {
+    return this.fs.doc(`Products/${id}`).snapshotChanges();
   }
 
   getStore() {
@@ -105,6 +104,44 @@ export class ProductService {
     });
 
   }
+  //Inventory
+  async updateInventory(product, quantity) {
+    if (quantity > 0) {
+      let fQuan: Number = Number(product.quantity) + Number(quantity);
+      return this.fs.collection("Products").doc(product.id)
+        .set({ quantity: fQuan }, { merge: true }).then(() => {
+          this.commonService.presentToast("Quantity Updated")
+        });
+    } else {
+      this.commonService.presentToast("Quantity not Valid")
+    }
+  }
+  async sellProduct(product, quantity) {
+    if (quantity > 0) {
+      if (product.quantity > quantity) {
+        let fQuan: Number = Number(product.quantity) - Number(quantity);
+        return this.fs.collection("Products").doc(product.id)
+          .set({ quantity: fQuan }, { merge: true }).then(() => {
+            this.commonService.presentToast("Product Sold")
+          });
+      } else {
+        this.commonService.presentToast("Quantity not Valid")
+      }
+    } else {
+      this.commonService.presentToast("No units in the Inventory")
+    }
 
-
+  }
+  updateProduct(product) {
+    return this.fs.collection("Products").doc(product.id)
+      .set(product, { merge: true }).then(() => {
+        this.commonService.presentToast("Product Updated")
+      });
+  }
+  async deleteProduct(product) {
+    return this.fs.collection("Products").doc(product.id).delete()
+      .then(() => {
+        this.commonService.presentToast("Product Deleted")
+      });
+  }
 }

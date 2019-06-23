@@ -16,12 +16,10 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private prodService: ProductService,
-    public authService: AuthService,
   ) { }
 
   ngOnInit() {
     this.getCategories();
-    this.authService.getProfile();
   }
 
 

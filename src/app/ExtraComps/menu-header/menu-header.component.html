@@ -11,13 +11,15 @@
     </ion-buttons>
     <ion-buttons slot="end">
 
-      <!-- <ion-button fill=clear (click)="presentPopover($ev)">
-        <ion-icon name="notifications"></ion-icon>
-      </ion-button> -->
 
       <ion-button shape="round" (click)="presentNotifications($ev)">
         <ion-icon name="notifications"></ion-icon>
         <ion-badge fill=clear slot="end">2</ion-badge>
+      </ion-button>
+
+
+      <ion-button fill=clear (click)="gtSettings()">
+        <ion-icon name="cog"></ion-icon>
       </ion-button>
 
     </ion-buttons>

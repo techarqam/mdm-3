@@ -34,6 +34,8 @@ import { OrdersService } from './Services/Orders/orders.service';
 import { SalesService } from './Services/Sales/sales.service';
 import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
 import { ProfileService } from './Services/Profile/profile.service';
+import { SettingsComponent } from './ExtraComps/settings/settings.component';
+import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { ProfileService } from './Services/Profile/profile.service';
     NotificationComponent,
     NotificationPopComponent,
     EditBannerComponent,
+    SettingsComponent,
+    EditProductComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,

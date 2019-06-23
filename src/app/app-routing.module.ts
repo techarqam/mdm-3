@@ -12,6 +12,9 @@ import { AddProductComponent } from './Components/Product/add-product/add-produc
 import { AuthGuard } from './Guards/Auth/auth.guard';
 import { NegAuthGuard } from './Guards/Auth/neg-auth.guard';
 import { NotificationComponent } from './Components/notifications/notification/notification.component';
+import { SettingsComponent } from './ExtraComps/settings/settings.component';
+import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
+import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -66,8 +69,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'edit-product/:id',
+    component: EditProductComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'notifications',
     component: NotificationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
     canActivate: [AuthGuard]
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../../Services/product/product.service';
+import { AlertController } from '@ionic/angular';
+import { CommonService } from '../../../Services/Common/common.service';
 
 @Component({
   selector: 'app-sales',
@@ -15,6 +17,8 @@ export class SalesComponent implements OnInit {
 
   constructor(
     private prodService: ProductService,
+    public alertCtrl: AlertController,
+    public commonService: CommonService,
   ) {
     this.getProducts();
   }
@@ -48,6 +52,50 @@ export class SalesComponent implements OnInit {
     this.showLoader = true;
     this.products = this.prodService.getCollbyCat(catId);
     this.products.subscribe(() => { this.showLoader = false });
+  }
+
+
+  checkProduct(prodId, prod) {
+    if (prod.status == "Verified") {
+      this.sellProduct(prodId, prod)
+    } else {
+      this.commonService.presentToast("Product is not Verified")
+    }
+  }
+
+  async sellProduct(prodId, prod) {
+    let product = prod;
+    product.id = prodId;
+    const alert = await this.alertCtrl.create({
+      header: product.name,
+      message: "How many units are sold ?",
+      inputs: [
+        {
+          name: 'quantity',
+          type: 'number',
+          placeholder: 'Quantity',
+          min: '0'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Sell',
+          handler: data => {
+            if (data.quantity) {
+              this.prodService.sellProduct(product, data.quantity);
+            } else {
+              this.commonService.presentToast("Quantity not Valid");
+            }
+          }
+        }
+      ]
+    });
+    return await alert.present();
   }
 
 }

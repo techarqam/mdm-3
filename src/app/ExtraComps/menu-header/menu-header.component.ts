@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/Auth/auth.service';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, NavController } from '@ionic/angular';
 import { NotificationPopComponent } from '../../Components/notifications/notification-pop/notification-pop.component';
 
 @Component({
@@ -16,6 +16,7 @@ export class MenuHeaderComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public popoverController: PopoverController,
+    public navCtrl: NavController,
   ) { }
 
   ngOnInit() {
@@ -39,5 +40,9 @@ export class MenuHeaderComponent implements OnInit {
       translucent: true
     });
     return await popover.present();
+  }
+
+  gtSettings() {
+    this.navCtrl.navigateRoot('/settings');
   }
 }
