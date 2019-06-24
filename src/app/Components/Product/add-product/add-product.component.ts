@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/Services/product/product.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../Services/Auth/auth.service';
+import { CommonService } from '../../../Services/Common/common.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-product',
@@ -10,13 +12,23 @@ import { AuthService } from '../../../Services/Auth/auth.service';
 })
 export class AddProductComponent implements OnInit {
 
+  img1: any;
+  img2: any;
+  images: Array<any> = [];
+
+  name: string = 'Add Product';
+
   cats: Observable<any>;
   subCats: Observable<any>;
   showLoader: boolean = true;
 
   constructor(
     private prodService: ProductService,
-  ) { }
+    public commonService: CommonService,
+    public navCtrl: NavController,
+  ) {
+    this.getCategories();
+  }
 
   ngOnInit() {
     this.getCategories();
@@ -26,23 +38,46 @@ export class AddProductComponent implements OnInit {
 
   addProduct() {
     let data = this.prodService.product.value;
-    console.log(data);
+    if (this.prodService.product.valid) {
+      if (this.img2) {
 
-    this.prodService.addDoc(data).then(res => {
-      console.log(res);
-    });
+        this.prodService.addDoc(data, this.img2).then(() => {
+          this.navCtrl.pop();
+        });
+      } else {
+        this.commonService.presentToast("Select an Image");
+      }
+    } else {
+      this.commonService.presentToast("Product not Valid")
+    }
   }
 
-  getCategories() {
+  async getCategories() {
     this.cats = this.prodService.getCategories();
     this.cats.subscribe(() => { this.showLoader = false });
   }
 
-  getSubCat(cat) {
+  async getSubCat(cat) {
     this.showLoader = true;
     this.subCats = this.prodService.getSubCategories(cat);
     this.subCats.subscribe(() => { this.showLoader = false });
   }
 
+  fileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        this.img1 = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    let fileList: FileList = event.target.files;
+    let file: File = fileList[0];
+    this.img2 = file;
+  }
+  removeImage() {
+    this.img1 = null;
+  }
 
 }

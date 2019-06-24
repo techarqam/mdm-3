@@ -1,3 +1,5 @@
+<app-back-header name="{{name}}"></app-back-header>
+
 <ion-content>
 
   <ion-grid>
@@ -5,6 +7,7 @@
       <ion-col size="12" size-md="6" offset-md="3">
         <ion-card>
           <ion-card-content>
+            <app-loader *ngIf="showLoader"></app-loader>
 
             <form [formGroup]="this.prodService.product">
 
@@ -13,7 +16,6 @@
                 <ion-input type="text" formControlName="name"></ion-input>
               </ion-item>
 
-              <app-loader *ngIf="showLoader"></app-loader>
 
               <ion-item>
                 <ion-label position="floating">Category</ion-label>
@@ -51,7 +53,28 @@
                 <ion-textarea formControlName="description"></ion-textarea>
               </ion-item>
 
-              <ion-button (click)="addProduct()" size="block">Add Product</ion-button>
+              <ion-card *ngIf="!img1">
+                <label class="upContainer">
+                  <ion-input type="file" style="display: none;" (change)="fileChange($event)" accept="image/x-png,image/gif,image/jpeg"></ion-input>
+                  <div class="dumText">
+                    <p class="add">+</p>
+                    <p class="selText">Select Image</p>
+                  </div>
+                </label>
+              </ion-card>
+
+
+              <ion-card *ngIf="img1">
+                <img [src]="img1" class="imgView margin" />
+                <div class="editBtns">
+                  <ion-button size="small" color="danger" (click)="removeImage()">
+                    Remove
+                  </ion-button>
+                </div>
+              </ion-card>
+
+
+              <ion-button (click)="addProduct()" class="ion-margin-top" expand="block">Add Product</ion-button>
             </form>
 
 

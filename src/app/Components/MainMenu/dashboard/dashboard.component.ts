@@ -11,6 +11,8 @@ import { Chart } from 'chart.js';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+
+  name: string = 'Dashboard';
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
   products: Number = 0;

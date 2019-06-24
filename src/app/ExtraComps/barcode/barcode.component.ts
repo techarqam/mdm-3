@@ -8,6 +8,7 @@ import { ProductService } from '../../Services/product/product.service';
   styleUrls: ['./barcode.component.scss'],
 })
 export class BarcodeComponent implements OnInit {
+  name: string = 'Barcode';
 
   product;
   createdCode = null;

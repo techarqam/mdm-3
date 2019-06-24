@@ -1,9 +1,10 @@
-a {
+.pName {
     color: grey;
     text-decoration: none;
+    cursor: pointer;
 }
 
-a:hover {
+.pName:hover {
     p {
         border-bottom: 1px solid grey;
     }

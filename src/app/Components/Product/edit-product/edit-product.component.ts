@@ -11,6 +11,7 @@ import { CommonService } from '../../../Services/Common/common.service';
   styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent implements OnInit {
+  name: string = 'Edit Product';
 
   product;
   cats: Observable<any>;

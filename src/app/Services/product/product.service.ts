@@ -67,13 +67,35 @@ export class ProductService {
     return this.fs.collection('SubCategories', ref => ref.orderBy("name").where("category", "==", cat)).snapshotChanges();
   }
 
+  getProductSingleImage(prodId) {
+    return this.fs.collection(`Products/${prodId}/Images`, ref => ref.limit(1)).snapshotChanges();
+  }
+  getProductImages(prodId) {
+    return this.fs.collection(`Products/${prodId}`).snapshotChanges();
+  }
 
-  addDoc(data) {
-    return new Promise<any>((resolve, reject) => {
-      data.storeId = this.store.id;
-      data.storeName = this.store.storeName;
-      this.fs.collection(this.mdm).add(data).then(res => { }, err => reject(err));
-    });
+  async addDoc(data, image) {
+    data.storeId = this.store.id;
+    data.storeName = this.store.storeName;
+    let tempUrl: string = '';
+    return firebase.storage().ref("Products/" + this.store.storeName + "/" + data.name).put(image).then(() => {
+      firebase.storage().ref("Products/" + this.store.storeName + "/" + data.name).getDownloadURL().then((dURL) => {
+        tempUrl = dURL;
+        console.log(tempUrl)
+        this.fs.collection(this.mdm).add(data).then(res => {
+          console.log(res.id)
+          this.fs.collection(this.mdm).doc(res.id).collection("Images").add({
+            imageUrl: tempUrl,
+            imageDURl: dURL
+          }).then(() => {
+            console.log(dURL)
+            this.commonService.presentToast("Product Uploaded");
+          });
+        })
+      })
+    })
+
+
   }
 
 
@@ -138,7 +160,7 @@ export class ProductService {
     }
 
   }
-  updateProduct(product) {
+  async updateProduct(product) {
     return this.fs.collection("Products").doc(product.id)
       .set(product, { merge: true }).then(() => {
         this.commonService.presentToast("Product Updated")

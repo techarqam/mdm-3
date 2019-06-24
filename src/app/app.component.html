@@ -16,7 +16,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-item routerLinkActive="activeHighlight" [routerDirection]="'root'" routerLink="/barcode-scan">
+          <ion-item routerLinkActive="activeHighlight" *ngIf="isMobile" [routerDirection]="'root'" routerLink="/barcode-scan">
             <ion-icon slot="start" name="qr-scanner"></ion-icon>
             <ion-label>
               Scanner

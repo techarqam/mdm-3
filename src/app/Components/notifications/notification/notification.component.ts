@@ -7,6 +7,7 @@ import { NotificationsService } from '../../../Services/Notifications/notificati
   styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnInit {
+  name: string = 'Notifications';
 
   constructor(
     public notiService: NotificationsService,

@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
+  name: string = 'Settings';
 
   store;
   unVerified: boolean;

@@ -9,6 +9,7 @@ import { EditBannerComponent } from '../../Profile/edit-banner/edit-banner.compo
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  name: string = 'Profile';
 
   store;
   showLoader: boolean = true;

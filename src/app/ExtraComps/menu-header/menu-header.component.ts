@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../Services/Auth/auth.service';
 import { PopoverController, NavController } from '@ionic/angular';
 import { NotificationPopComponent } from '../../Components/notifications/notification-pop/notification-pop.component';
@@ -9,6 +9,7 @@ import { NotificationPopComponent } from '../../Components/notifications/notific
   styleUrls: ['./menu-header.component.scss'],
 })
 export class MenuHeaderComponent implements OnInit {
+  @Input() name: string;
 
   store;
   unVerified: boolean = false;

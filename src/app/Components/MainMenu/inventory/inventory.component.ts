@@ -10,6 +10,7 @@ import { CommonService } from '../../../Services/Common/common.service';
   styleUrls: ['./inventory.component.scss'],
 })
 export class InventoryComponent implements OnInit {
+  name: string = 'Inventory';
 
   products: Observable<any>;
   cats: Observable<any>;
@@ -130,7 +131,18 @@ export class InventoryComponent implements OnInit {
     return await alert.present();
   }
 
-
+  viewImage(id) {
+    this.prodService.getProductSingleImage(id).subscribe(snap => {
+      snap.forEach(snip => {
+        let temp: any = snip.payload.doc.data();
+        if (temp.imageUrl) {
+          window.open(temp.imageUrl, "_blank")
+        } else {
+          this.commonService.presentToast("No Image")
+        }
+      })
+    })
+  }
   editProduct(id) {
     this.navCtrl.navigateForward(`/edit-product/${id}`)
   }
