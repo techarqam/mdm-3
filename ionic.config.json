@@ -1,5 +1,7 @@
 {
   "name": "alo-vendor",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -38,6 +38,9 @@ import { ProfileService } from './Services/Profile/profile.service';
 import { SettingsComponent } from './ExtraComps/settings/settings.component';
 import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
 import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
+import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
+import { BarcodeScannerOriginal } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
     SettingsComponent,
     EditProductComponent,
     BarcodeComponent,
+    BarcodeScannerComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -88,7 +92,8 @@ import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
     OrdersService,
     SalesService,
     ProfileService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BarcodeScanner,
   ],
   bootstrap: [AppComponent]
 })

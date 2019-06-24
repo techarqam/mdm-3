@@ -16,6 +16,7 @@ import { SettingsComponent } from './ExtraComps/settings/settings.component';
 import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
 import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
 import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
+import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
 
 const routes: Routes = [
   {
@@ -88,7 +89,12 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'barcode-scan',
+    component: BarcodeScannerComponent,
+    canActivate: [AuthGuard]
+  },
 
 ];
 

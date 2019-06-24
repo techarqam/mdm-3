@@ -26,6 +26,11 @@ export class AppComponent {
       url: '/orders',
       icon: 'cart'
     },
+    // {
+    //   title: 'Scanner',
+    //   url: '/barcode-scan',
+    //   icon: 'qr-scanner'
+    // },
     {
       title: 'Inventory',
       url: '/inventory',
@@ -43,6 +48,8 @@ export class AppComponent {
     },
 
   ];
+
+  isMobile: boolean = false;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -56,6 +63,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      if (this.platform.is('cordova')) { this.isMobile = true; }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
