@@ -21,7 +21,7 @@ export class CommonService {
 
   async toggleVisibility(storeId, status) {
     return this.db.collection("Sellers").doc(storeId)
-      .set({ Visible : status }, { merge: true });
+      .set({ Visible: status }, { merge: true });
   }
 
   async presentToast(msg) {
@@ -34,4 +34,15 @@ export class CommonService {
     toast.present();
   }
 
+  makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
 }
+

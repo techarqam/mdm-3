@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/Services/product/product.service';
 import { Observable } from 'rxjs';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ModalController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
+import { UploadMultipleImagesComponent } from '../../../ExtraComps/upload-multiple-images/upload-multiple-images.component';
 
 @Component({
   selector: 'app-inventory',
@@ -21,6 +22,7 @@ export class InventoryComponent implements OnInit {
     private navCtrl: NavController,
     public alertCtrl: AlertController,
     public commonService: CommonService,
+    public modalCtrl: ModalController,
   ) {
     this.getProducts();
   }
@@ -131,22 +133,20 @@ export class InventoryComponent implements OnInit {
     return await alert.present();
   }
 
-  viewImage(id) {
-    this.prodService.getProductSingleImage(id).subscribe(snap => {
-      snap.forEach(snip => {
-        let temp: any = snip.payload.doc.data();
-        if (temp.imageUrl) {
-          window.open(temp.imageUrl, "_blank")
-        } else {
-          this.commonService.presentToast("No Image")
-        }
-      })
-    })
-  }
   editProduct(id) {
     this.navCtrl.navigateForward(`/edit-product/${id}`)
   }
   viewBarcode(id) {
     this.navCtrl.navigateForward(`/product/barcode/${id}`)
+  }
+  async addImages(id, data) {
+    const modal = await this.modalCtrl.create({
+      component: UploadMultipleImagesComponent,
+      componentProps: {
+        'prodId': id,
+      }
+    });
+    return await modal.present();
+
   }
 }

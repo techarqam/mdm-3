@@ -55,12 +55,13 @@
                                     <ion-icon name="star-outline"></ion-icon>
                                 </ion-button>
                             </ion-col>
-                            <ion-col size="12" size-md="2" (click)="viewImage(p.payload.doc.id)" class="pName">
-                                <p ion-text color="grr" class="ion-text-center tableText ">{{p.payload.doc.data().name | uppercase}}</p>
+                            <ion-col size="12" size-md="2">
+                                <a [href]="p.payload.doc.data().primaryImage" target="_blank">
+                                    <p ion-text class="ion-text-center tableText ">{{p.payload.doc.data().name | uppercase}}</p>
+                                </a>
                             </ion-col>
-
                             <ion-col size="12" size-md="1">
-                                <p ion-text color="grr" class="ion-text-center tableText">{{p.payload.doc.data().price}}</p>
+                                <p ion-text color="grr" class="ion-text-center tableText">Rs.{{p.payload.doc.data().price}}</p>
                             </ion-col>
 
                             <ion-col size="12" size-md="1">
@@ -86,10 +87,13 @@
 
                             <ion-col size="12" size-md="2">
                                 <ion-button fill="clear" size="small" class="ion-float-left" (click)="updateInventory(p.payload.doc.id,p.payload.doc.data())">
-                                    <p>Add Inventory</p>
+                                    <p class="btnClass">Add Inventory</p>
+                                </ion-button>
+                                <ion-button fill="clear" size="small" class="ion-float-left" (click)="addImages(p.payload.doc.id,p.payload.doc.data())">
+                                    <p class="btnClass">Add Images</p>
                                 </ion-button>
                                 <ion-button fill="clear" size="small" class="ion-float-left" (click)="viewBarcode(p.payload.doc.id)">
-                                    <p>View Barcode</p>
+                                    <p class="btnClass">View Barcode</p>
                                 </ion-button>
                             </ion-col>
 

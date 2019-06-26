@@ -1,11 +1,16 @@
-.pName {
+.a {
     color: grey;
     text-decoration: none;
     cursor: pointer;
 }
 
-.pName:hover {
+.a:hover {
     p {
         border-bottom: 1px solid grey;
     }
+}
+
+.btnClass {
+    margin: 0;
+    font-size: 12px;
 }

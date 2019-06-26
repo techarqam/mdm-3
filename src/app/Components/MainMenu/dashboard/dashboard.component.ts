@@ -21,8 +21,8 @@ export class DashboardComponent implements OnInit {
 
   //Cart Variables
   doughnutChart: any;
-  dataArray: Array<any> = [5, 10];
-  labelsArray: Array<any> = ['arqam', 'aiman'];
+  dataArray: Array<any> = [];
+  labelsArray: Array<any> = [];
 
   constructor(
     public menuCtrl: MenuController,

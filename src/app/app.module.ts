@@ -41,6 +41,7 @@ import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
 import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
 import { BarcodeScannerOriginal } from '@ionic-native/barcode-scanner';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     EditProductComponent,
     BarcodeComponent,
     BarcodeScannerComponent,
+    UploadMultipleImagesComponent
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -71,6 +73,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     LoaderComponent,
     NotificationPopComponent,
     EditBannerComponent,
+    UploadMultipleImagesComponent,
   ],
   imports: [
     BrowserModule,

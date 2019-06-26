@@ -17,6 +17,7 @@ import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banne
 import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
 import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
 import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
+import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,11 @@ const routes: Routes = [
   {
     path: 'barcode-scan',
     component: BarcodeScannerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'upload-images',
+    component: UploadMultipleImagesComponent,
     canActivate: [AuthGuard]
   },
 

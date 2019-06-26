@@ -3,7 +3,8 @@ import { ProductService } from 'src/app/Services/product/product.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../Services/Auth/auth.service';
 import { CommonService } from '../../../Services/Common/common.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import { UploadMultipleImagesComponent } from '../../../ExtraComps/upload-multiple-images/upload-multiple-images.component';
 
 @Component({
   selector: 'app-add-product',
@@ -26,6 +27,7 @@ export class AddProductComponent implements OnInit {
     private prodService: ProductService,
     public commonService: CommonService,
     public navCtrl: NavController,
+    public modalCtrl: ModalController,
   ) {
     this.getCategories();
   }
@@ -34,15 +36,23 @@ export class AddProductComponent implements OnInit {
     this.getCategories();
   }
 
-
+  async openUploadImages() {
+    const modal = await this.modalCtrl.create({
+      component: UploadMultipleImagesComponent,
+    });
+    return await modal.present();
+  }
 
   addProduct() {
     let data = this.prodService.product.value;
     if (this.prodService.product.valid) {
       if (this.img2) {
 
-        this.prodService.addDoc(data, this.img2).then(() => {
-          this.navCtrl.pop();
+        this.prodService.addDoc(data, this.img2).then(ress => {
+          // this.openUploadImages();
+          this.prodService.product.reset();
+          this.removeImage();
+          console.log(ress)
         });
       } else {
         this.commonService.presentToast("Select an Image");

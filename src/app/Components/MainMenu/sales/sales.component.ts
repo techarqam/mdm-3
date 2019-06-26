@@ -28,18 +28,6 @@ export class SalesComponent implements OnInit {
     this.getCategories();
   }
 
-  viewImage(id) {
-    this.prodService.getProductSingleImage(id).subscribe(snap => {
-      snap.forEach(snip => {
-        let temp: any = snip.payload.doc.data();
-        if (temp.imageUrl) {
-          window.open(temp.imageUrl, "_blank")
-        } else {
-          this.commonService.presentToast("No Image")
-        }
-      })
-    })
-  }
 
   getProducts() {
     this.showLoader = true;
