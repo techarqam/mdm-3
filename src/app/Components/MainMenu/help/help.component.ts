@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../../../Services/Common/common.service';
 
 @Component({
   selector: 'app-help',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./help.component.scss'],
 })
 export class HelpComponent implements OnInit {
-  name: string = 'Help';
+  name: string = 'Support';
+  faqs: Array<any> = [];
 
-  constructor() { }
+  constructor(
+    public commonService: CommonService,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getVendorFaqs();
+  }
+
+
+  getVendorFaqs() {
+    this.commonService.getVendorFaqs().subscribe(nap => {
+      this.faqs = [];
+      nap.forEach(snip => {
+        let temp: any = snip.payload.doc.data();
+        temp.id = snip.payload.doc.id;
+        this.faqs.push(temp);
+      })
+    })
+  }
 
 }

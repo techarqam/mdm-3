@@ -67,7 +67,7 @@
                                 <p ion-text color="grr" class="ion-text-center tableText">{{p.payload.doc.data().status}}</p>
                             </ion-col>
                             <ion-col size="12" size-md="2">
-                                <p ion-text color="grr" class="ion-text-center tableText rs">Rs. {{p.payload.doc.data().amount | number: '1.0-0'}}</p>
+                                <p ion-text color="grr" class="ion-text-center tableText rs">Rs. {{p.payload.doc.data().vendorProfit | number: '1.0-0'}}</p>
                             </ion-col>
                             <ion-col size="12" size-md="2" class="ion-text-center">
                                 <ion-button size="small" class="ion-text-center" *ngIf="p.payload.doc.data().status == 'Pending'" (click)="deliver(p.payload.doc.id)">

@@ -26,10 +26,6 @@ export class ProfileService {
           .set({ bannerImage: dURL }, { merge: true });
       })
     })
-
-
-
-    // console.log(banner)
   }
   getStore() {
     this.authService.getProfile().subscribe(snap => {

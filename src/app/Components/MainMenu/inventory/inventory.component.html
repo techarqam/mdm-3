@@ -61,7 +61,7 @@
                                 </a>
                             </ion-col>
                             <ion-col size="12" size-md="1">
-                                <p ion-text color="grr" class="ion-text-center tableText">Rs.{{p.payload.doc.data().price}}</p>
+                                <p ion-text color="grr" class="ion-text-center tableText">Rs.{{p.payload.doc.data().price | number:'1.0-0'}}</p>
                             </ion-col>
 
                             <ion-col size="12" size-md="1">

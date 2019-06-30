@@ -4,6 +4,7 @@ import { ProductService } from '../../../Services/product/product.service';
 import { OrdersService } from '../../../Services/Orders/orders.service';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,18 +25,23 @@ export class DashboardComponent implements OnInit {
   dataArray: Array<any> = [];
   labelsArray: Array<any> = [];
 
+  //profits
+  saleProfit: number = 0;
   constructor(
     public menuCtrl: MenuController,
     public prodService: ProductService,
     public orderService: OrdersService,
+    public authService: AuthService,
   ) {
     this.menuCtrl.enable(true);
   }
 
   ngOnInit() {
+    this.getStore();
     this.getProducts();
     this.getFiveProducts();
     this.LoadCharts();
+    this.getPendingOrders();
   }
 
   LoadCharts() {
@@ -67,6 +73,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getStore() {
+    this.authService.getProfile().subscribe(snap => {
+      let temp: any = snap.payload.data();
+      this.saleProfit = temp.profits;
+    });
+  }
 
   getProducts() {
     this.prodService.getColl().subscribe(snap => {
@@ -74,9 +86,9 @@ export class DashboardComponent implements OnInit {
     })
   }
   getPendingOrders() {
-    // this.orderService.getColl().subscribe(snap => {
-    //   this.orders = snap.length;
-    // })
+    this.orderService.getStatusAOrders("Pending").subscribe(snap => {
+      this.orders = snap.length;
+    })
   }
   getFiveProducts() {
     this.limitedProd = this.prodService.getLimitedProducts(5)

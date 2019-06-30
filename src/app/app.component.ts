@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './Services/Auth/auth.service';
 import { tap } from 'rxjs/operators';
 import * as firebase from 'firebase';
+import { OrdersService } from './Services/Orders/orders.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -50,6 +51,7 @@ export class AppComponent {
   ];
 
   isMobile: boolean = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -68,8 +70,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
-
-
 
 
 

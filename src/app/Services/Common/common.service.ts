@@ -18,6 +18,9 @@ export class CommonService {
     public db: AngularFirestore,
   ) { }
 
+  getVendorFaqs() {
+    return this.db.collection("Faqs", ref => ref.where("userType", "==", "Vendor")).snapshotChanges();
+  }
 
   async toggleVisibility(storeId, status) {
     return this.db.collection("Sellers").doc(storeId)

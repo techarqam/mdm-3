@@ -57,6 +57,7 @@ export class AuthService {
     ])),
 
     bannerImage: new FormControl(""),
+    profits: new FormControl(0),
     timeStamp: new FormControl(moment().format())
   });
 
