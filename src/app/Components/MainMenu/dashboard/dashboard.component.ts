@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { ProductService } from '../../../Services/product/product.service';
 import { OrdersService } from '../../../Services/Orders/orders.service';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
 import { AuthService } from '../../../Services/Auth/auth.service';
+import { SetLocationComponent } from 'src/app/ExtraComps/set-location/set-location.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     public menuCtrl: MenuController,
     public prodService: ProductService,
+    public modalCtrl: ModalController,
     public orderService: OrdersService,
     public authService: AuthService,
   ) {
@@ -102,5 +104,31 @@ export class DashboardComponent implements OnInit {
       this.LoadCharts();
     })
   }
+
+
+  async launchLocationPage() {
+
+
+    const modal = await this.modalCtrl.create({
+      component: SetLocationComponent,
+    });
+
+
+
+
+    return await modal.present();
+
+  }
+
+  //   let modal = this.modalCtrl.create(SetLocationComponent);
+
+  //   modal.onDidDismiss((location) => {
+  //     console.log(location);
+  //   });
+
+  //   modal.present();
+
+  // }
+
 
 }

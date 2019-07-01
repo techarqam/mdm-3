@@ -42,6 +42,11 @@ import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-sc
 import { BarcodeScannerOriginal } from '@ionic-native/barcode-scanner';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
+import { GoogleMapsService } from './Services/Location/maps/GoogleMaps/google-maps.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { ConnectivityService } from './Services/Location/Connectivity/connectivity.service';
+import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,8 @@ import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-imag
     EditProductComponent,
     BarcodeComponent,
     BarcodeScannerComponent,
-    UploadMultipleImagesComponent
+    UploadMultipleImagesComponent,
+    SetLocationComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -74,6 +80,7 @@ import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-imag
     NotificationPopComponent,
     EditBannerComponent,
     UploadMultipleImagesComponent,
+    SetLocationComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +102,11 @@ import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-imag
     OrdersService,
     SalesService,
     ProfileService,
+    //location
+    GoogleMapsService,
+    Geolocation,
+    Network,
+    ConnectivityService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
   ],

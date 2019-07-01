@@ -12,6 +12,11 @@ export class CommonService {
     visibility: new FormControl("", Validators.required),
   });
 
+  location = new FormGroup({
+    query: new FormControl("", Validators.required),
+  });
+
+
 
   constructor(
     public toastCtrl: ToastController,
