@@ -109,7 +109,8 @@ export class SetLocationComponent implements OnInit {
   }
 
   save() {
-    this.modalCtrl.dismiss(this.location);
+    console.log(this.location)
+    // this.modalCtrl.dismiss(this.location);
   }
 
   close() {

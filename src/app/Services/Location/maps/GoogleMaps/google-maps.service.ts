@@ -2,7 +2,18 @@ import { Injectable } from '@angular/core';
 import { ConnectivityService } from '../../Connectivity/connectivity.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google: any
-
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  GoogleMapOptions,
+  CameraPosition,
+  MarkerOptions,
+  Marker,
+  MyLocation,
+  MarkerIcon,
+  HtmlInfoWindow,
+} from '@ionic-native/google-maps';
 @Injectable({
   providedIn: 'root'
 })
@@ -85,6 +96,8 @@ export class GoogleMapsService {
 
   }
 
+
+
   initMap(): Promise<any> {
 
     this.mapInitialised = true;
@@ -103,6 +116,38 @@ export class GoogleMapsService {
         }
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+
+        let options: MarkerOptions = {
+          title: 'Hello World',
+          snippet: '@ionic-native/google-maps',
+          position: latLng,
+          infoWindowAnchor: [16, 0],
+          anchor: [16, 32],
+          draggable: true,
+          flat: false,
+          rotation: 32,
+          visible: true,
+          styles: {
+            'text-align': 'center',
+            'font-style': 'italic',
+            'font-weight': 'bold',
+            'color': 'red'
+          },
+          // animation: GoogleMapsAnimation.DROP,
+          zIndex: 0,
+          disableAutoPan: true
+        };
+
+        // this.map.addMarker(options).then((marker: Marker) => {
+
+        // })
+
+        // this.map.addMarker({
+        //   title: "My Location",
+        //   snippet: "subTit",
+        //   position: latLng,
+        // })
+
         resolve(true);
 
       });

@@ -106,19 +106,6 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  async launchLocationPage() {
-
-
-    const modal = await this.modalCtrl.create({
-      component: SetLocationComponent,
-    });
-
-
-
-
-    return await modal.present();
-
-  }
 
   //   let modal = this.modalCtrl.create(SetLocationComponent);
 

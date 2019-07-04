@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../Services/Auth/auth.service';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, ModalController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
+import { SetLocationComponent } from '../../../ExtraComps/set-location/set-location.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,6 +20,7 @@ export class SignUpComponent implements OnInit {
     public menuCtrl: MenuController,
     public commonService: CommonService,
     public navCtrl: NavController,
+    public modalCtrl: ModalController,
   ) {
     this.menuCtrl.enable(false);
   }
@@ -58,6 +60,12 @@ export class SignUpComponent implements OnInit {
 
   removeImage() {
     this.img1 = null;
+  }
+  async launchLocationPage() {
+    const modal = await this.modalCtrl.create({
+      component: SetLocationComponent,
+    });
+    return await modal.present();
   }
 
 }
