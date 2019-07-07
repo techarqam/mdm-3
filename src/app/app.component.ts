@@ -65,7 +65,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.platform.is('cordova')) { this.isMobile = true; }
+      if (this.platform.is('mobile')) { this.isMobile = true; }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

@@ -75,6 +75,7 @@ export class BarcodeScannerComponent implements OnInit {
             } else {
               this.commonService.presentToast("Enter Quantity");
             }
+            this.alertCtrl.dismiss();
           }
         }
       ]

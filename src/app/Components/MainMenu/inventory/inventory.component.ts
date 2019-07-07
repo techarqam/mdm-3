@@ -91,6 +91,7 @@ export class InventoryComponent implements OnInit {
             } else {
               this.commonService.presentToast("Enter Quantity");
             }
+            this.alertCtrl.dismiss();
           }
         }
       ]
@@ -126,6 +127,7 @@ export class InventoryComponent implements OnInit {
             } else {
               this.commonService.presentToast("Product Name not Valid");
             }
+            this.alertCtrl.dismiss();
           }
         }
       ]

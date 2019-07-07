@@ -62,6 +62,7 @@ export class OrdersComponent implements OnInit {
             this.orderService.deliverOrder(id).then(() => {
               this.commonService.presentToast("Order Delivered");
             })
+            this.alertCtrl.dismiss();
           }
         }
       ]

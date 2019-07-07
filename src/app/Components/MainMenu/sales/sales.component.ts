@@ -92,6 +92,7 @@ export class SalesComponent implements OnInit {
             } else {
               this.commonService.presentToast("Quantity not Valid");
             }
+            this.alertCtrl.dismiss();
           }
         }
       ]
