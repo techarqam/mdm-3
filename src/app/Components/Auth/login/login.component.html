@@ -1,9 +1,10 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="6" offset-md="3">
-        <img src="assets/imgs/logo.png" class="loginImage" />
+      <ion-col size="12" size-md="4" offset-md="4">
+
         <ion-card>
+          <img src="assets/imgs/logo.png" class="loginImage" />
           <ion-card-header>
             <ion-card-title color="primary">Sign In to ALO Vendor</ion-card-title>
           </ion-card-header>
@@ -22,12 +23,10 @@
               </ion-item>
 
 
-              <ion-button class="ion-margin-top ion-margin-bottom " (click)="onSubmit()">Login</ion-button>
+              <ion-button class="ion-margin-vertical" expand="full" (click)="onSubmit()">Login</ion-button>
             </form>
 
-            <ion-item>
-              <ion-button fill="clear" href="/sign-up">Register as a Vendor</ion-button>
-            </ion-item>
+            <ion-button class="ion-margin-vertical" expand="full" fill="clear" href="/sign-up">Register as a Vendor</ion-button>
 
 
           </ion-card-content>

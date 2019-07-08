@@ -57,7 +57,8 @@ export class AuthService {
     ])),
 
     bannerImage: new FormControl(""),
-    profits: new FormControl(0),
+    totalProfits: new FormControl(0),
+    dueProfits: new FormControl(0),
     timeStamp: new FormControl(moment().format())
   });
 
@@ -86,7 +87,14 @@ export class AuthService {
           data.bannerImage = dURL;
           this.fireAuth.auth.createUserWithEmailAndPassword(data.email, data.pass).then(res => {
             this.firestore.collection(`Sellers`).doc(`${res.user.uid}`).set(data)
-              .then(res => { }, err => reject(err));
+              .then(() => {
+                this.firestore.collection("AdminNotifications").add({
+                  head: "New Vendor Sign up",
+                  body: data.storeName + "has signed up as a Vendor. Initiate the verification procedure.",
+                  status: "Unread",
+                  timestamp: moment().format()
+                })
+              });
           }, err => reject(err));
         });
 

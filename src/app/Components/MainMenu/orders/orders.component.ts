@@ -45,7 +45,7 @@ export class OrdersComponent implements OnInit {
     this.orders.subscribe(() => { this.showLoader = false });
   }
 
-  async deliver(id) {
+  async deliver(id, data) {
     const alert = await this.alertCtrl.create({
       header: 'Deliver the order ?',
       subHeader: 'Is the order completed ? ',
@@ -59,9 +59,10 @@ export class OrdersComponent implements OnInit {
         }, {
           text: 'Delivered',
           handler: () => {
-            this.orderService.deliverOrder(id).then(() => {
-              this.commonService.presentToast("Order Delivered");
-            })
+            this.orderService.deliverOrder(id, data)
+            // .then(() => {
+            //   this.commonService.presentToast("Order Delivered");
+            // })
             this.alertCtrl.dismiss();
           }
         }

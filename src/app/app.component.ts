@@ -27,11 +27,11 @@ export class AppComponent {
       url: '/orders',
       icon: 'cart'
     },
-    // {
-    //   title: 'Scanner',
-    //   url: '/barcode-scan',
-    //   icon: 'qr-scanner'
-    // },
+    {
+      title: 'Payments',
+      url: '/payments',
+      icon: 'cash'
+    },
     {
       title: 'Inventory',
       url: '/inventory',

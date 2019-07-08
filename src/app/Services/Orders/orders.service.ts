@@ -21,8 +21,16 @@ export class OrdersService {
   getStatusAOrders(status) {
     return this.db.collection("Orders", ref => ref.where("storeId", "==", firebase.auth().currentUser.uid).where("status", "==", status)).snapshotChanges()
   }
-  deliverOrder(id) {
+  deliverOrder(id, data) {
     return this.db.collection("Orders").doc(id)
-      .set({ status: "Completed" }, { merge: true });
+      .set({ status: "Completed" }, { merge: true })
+      .then(() => {
+        this.db.collection("Sellers").doc(data.storeId).update(
+          { dueProfits: firebase.firestore.FieldValue.increment(data.vendorProfit) })
+      }).then(() => {
+        this.db.collection("AdminData").doc("Profits").update({
+          vendorCredit: firebase.firestore.FieldValue.increment(data.vendorProfit),
+        })
+      })
   }
 }

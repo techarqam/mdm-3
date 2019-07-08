@@ -47,6 +47,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { ConnectivityService } from './Services/Location/Connectivity/connectivity.service';
 import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
+import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
+import { PaymentsService } from './Services/Payments/payments.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { SetLocationComponent } from './ExtraComps/set-location/set-location.com
     BarcodeScannerComponent,
     UploadMultipleImagesComponent,
     SetLocationComponent,
+    PaymentsComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -102,6 +105,7 @@ import { SetLocationComponent } from './ExtraComps/set-location/set-location.com
     OrdersService,
     SalesService,
     ProfileService,
+    PaymentsService,
     //location
     GoogleMapsService,
     Geolocation,
