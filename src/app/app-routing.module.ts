@@ -20,6 +20,7 @@ import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-sc
 import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
 import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
 import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
+import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
 
 const routes: Routes = [
   {
@@ -111,6 +112,11 @@ const routes: Routes = [
   {
     path: 'payments',
     component: PaymentsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change-password',
+    component: ChangePassComponent,
     canActivate: [AuthGuard]
   },
 

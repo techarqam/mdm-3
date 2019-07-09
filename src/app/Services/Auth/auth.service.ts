@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import * as moment from 'moment';
 import * as firebase from 'firebase';
 import { tap } from 'rxjs/operators';
+import { CommonService } from '../Common/common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,22 @@ export class AuthService {
       Validators.minLength(6)
     ])),
   });
+
+  changePass = new FormGroup({
+    oldPass: new FormControl("", Validators.compose([
+      Validators.required,
+      Validators.minLength(6)
+    ])),
+    newPass: new FormControl("", Validators.compose([
+      Validators.required,
+      Validators.minLength(6)
+    ])),
+    newPassConfirm: new FormControl("", Validators.compose([
+      Validators.required,
+      Validators.minLength(6)
+    ])),
+  });
+
 
   signUp = new FormGroup({
 
@@ -66,8 +83,20 @@ export class AuthService {
   constructor(
     private fireAuth: AngularFireAuth,
     private firestore: AngularFirestore,
+    public commonService: CommonService,
   ) {
   }
+
+  changePassword(newPass) {
+    return firebase.auth().currentUser.updatePassword(newPass)
+      .catch(err => {
+        this.commonService.presentToast(err);
+      })
+  }
+  updatePassword(newPass, userId) {
+    return this.firestore.collection("Sellers").doc(userId).update({ pass: newPass })
+  }
+
 
 
   isLoggedIn() {

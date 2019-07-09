@@ -49,6 +49,7 @@ import { ConnectivityService } from './Services/Location/Connectivity/connectivi
 import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
 import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
 import { PaymentsService } from './Services/Payments/payments.service';
+import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { PaymentsService } from './Services/Payments/payments.service';
     UploadMultipleImagesComponent,
     SetLocationComponent,
     PaymentsComponent,
+    ChangePassComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
