@@ -52,7 +52,6 @@ export class AddProductComponent implements OnInit {
           // this.openUploadImages();
           this.prodService.product.reset();
           this.removeImage();
-          console.log(ress)
         });
       } else {
         this.commonService.presentToast("Select an Image");

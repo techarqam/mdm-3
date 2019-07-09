@@ -26,8 +26,6 @@ export class DashboardComponent implements OnInit {
   dataArray: Array<any> = [];
   labelsArray: Array<any> = [];
 
-  //profits
-  saleProfit: number = 0;
   constructor(
     public menuCtrl: MenuController,
     public prodService: ProductService,
@@ -39,7 +37,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getStore();
     this.getProducts();
     this.getFiveProducts();
     this.LoadCharts();
@@ -75,13 +72,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getStore() {
-    this.authService.getProfile().subscribe(snap => {
-      let temp: any = snap.payload.data();
-      this.saleProfit = temp.profits;
-    });
-  }
-
   getProducts() {
     this.prodService.getColl().subscribe(snap => {
       this.products = snap.length;
@@ -107,15 +97,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-  //   let modal = this.modalCtrl.create(SetLocationComponent);
-
-  //   modal.onDidDismiss((location) => {
-  //     console.log(location);
-  //   });
-
-  //   modal.present();
-
-  // }
 
 
 }

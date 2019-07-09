@@ -11,7 +11,8 @@ export class PaymentsService {
     public db: AngularFirestore,
   ) { }
 
-  getProfits() {
+  getTransactions() {
+    return this.db.collection("Transactions", ref => ref.where("sellerId", "==", firebase.auth().currentUser.uid)).valueChanges();
   }
 
 }
