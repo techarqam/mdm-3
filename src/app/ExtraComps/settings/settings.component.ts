@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/Auth/auth.service';
 import { CommonService } from '../../Services/Common/common.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit {
     public authService: AuthService,
     public commonService: CommonService,
     public alertCtrl: AlertController,
+    public navCtrl: NavController,
   ) {
     this.getStore()
   }
@@ -54,6 +55,10 @@ export class SettingsComponent implements OnInit {
     this.commonService.toggleVisibility(this.store.id, status).then(() => {
       this.commonService.presentToast("Store is now" + " " + this.statText);
     })
+  }
+
+  gtChangePass() {
+    this.navCtrl.navigateForward('/change-password');
   }
 
   getStore() {

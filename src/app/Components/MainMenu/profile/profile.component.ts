@@ -23,6 +23,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getStore()
   }
+  gtChangePass() {
+    this.navCtrl.navigateForward('/change-password');
+  }
 
   getStore() {
     this.authService.getProfile().subscribe(snap => {

@@ -8,9 +8,11 @@
             <form [formGroup]="this.commonService.settings">
               <ion-item lines="none">
                 <p slot="start">Store Visibility</p>
-                <ion-toggle slot="end" formControlName="visibility" [disabled]="unVerified" [checked]="visible" (ionChange)="toggleVisibility(this.commonService.settings.value.visibility)"></ion-toggle>
+                <ion-toggle slot="end" formControlName="visibility" [disabled]="unVerified" [checked]="visible"
+                  (ionChange)="toggleVisibility(this.commonService.settings.value.visibility)"></ion-toggle>
               </ion-item>
             </form>
+            <ion-button class="ion-float-right" fill="clear" (click)="gtChangePass()">Change Password</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
