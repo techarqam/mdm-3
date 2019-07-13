@@ -32,15 +32,24 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
     let data = this.authService.signUp.value;
-    this.authService.signUpM(data, this.img2).then(res => {
-      this.authService.signUp.reset();
-    }).catch(err => {
-      this.commonService.presentToast(err.message);
-    }).then(() => {
-      if (this.authService.isLoggedIn()) {
-        this.navCtrl.navigateRoot('/dashboard');
+    if (this.authService.signUp.valid) {
+      if (this.img1) {
+        this.authService.signUpM(data, this.img2).then(res => {
+          this.authService.signUp.reset();
+        }).catch(err => {
+          this.commonService.presentToast(err.message);
+        })
+        // .then(() => {
+        //   if (this.authService.isLoggedIn()) {
+        //     this.navCtrl.navigateRoot('/dashboard');
+        //   }
+        // });
+      } else {
+        this.commonService.presentToast("Upload a banner image");
       }
-    });
+    } else {
+      this.commonService.presentToast("Store data not valid");
+    }
   }
 
 

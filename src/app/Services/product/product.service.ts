@@ -42,7 +42,9 @@ export class ProductService {
     timestamp: new FormControl(moment().format()),
     storeId: new FormControl(""),
     storeName: new FormControl(""),
-    // Images
+    primaryImage: new FormControl(""),
+    setFeatured: new FormControl(false),
+
   })
 
   category = new FormGroup({
@@ -71,7 +73,7 @@ export class ProductService {
   //   return this.fs.collection(`Products/${prodId}/Images`, ref => ref.limit(1)).snapshotChanges();
   // }
   getProductImages(prodId) {
-    return this.fs.collection(`Products/${prodId}/Images`).snapshotChanges();
+    return this.fs.collection(`Products/${prodId}/Images`, ref => ref.orderBy("primaryImage", 'desc')).snapshotChanges();
   }
 
   async addDoc(data, image) {
@@ -84,6 +86,7 @@ export class ProductService {
         this.fs.collection(this.mdm).add(data).then(res => {
           this.fs.collection(this.mdm).doc(res.id).collection("Images").add({
             imageUrl: dURL,
+            primaryImage: true
           }).then(() => {
             this.commonService.presentToast("Product Uploaded");
           });
@@ -92,19 +95,63 @@ export class ProductService {
     })
   }
 
+  async makeImagePrimary(imgId, prodId, imageUrl) {
+    await this.fs.collection("Products").doc(prodId).collection("Images").doc(imgId).update({ primaryImage: true }).then(() => {
+      this.fs.collection("Products").doc(prodId).get().subscribe(snap => {
+        if (snap.data().primaryImageId) {
+          this.fs.collection("Products").doc(prodId).collection("Images").doc(snap.data().primaryImageId).update({ primaryImage: false }).then(() => {
+            this.fs.collection("Products").doc(prodId).update({ primaryImage: imageUrl, primaryImageId: imgId }).then(() => {
+              this.commonService.presentToast("Image marked as primary");
+            })
+          })
+        } else {
+          this.fs.collection("Products").doc(prodId).update({ primaryImage: imageUrl, primaryImageId: imgId }).then(() => {
+            this.commonService.presentToast("Image marked as primary");
+          })
+        }
+      })
+    })
+  }
 
+  async deleteImage(imgId, prodId) {
+    await this.fs.collection("Products").doc(prodId).collection("Images").doc(imgId).delete().then(() => {
+      this.commonService.presentToast("Image deleted");
+    })
+  }
   uploadProductImage(data, image) {
     let picName = this.commonService.makeid(6)
     return firebase.storage().ref("Products/" + this.store.storeName + "/" + picName).put(image).then(() => {
       firebase.storage().ref("Products/" + this.store.storeName + "/" + picName).getDownloadURL().then((dURL) => {
         this.fs.collection(this.mdm).doc(data.id).collection("Images").add({
           imageUrl: dURL,
+          primaryImage: false
         }).then(() => {
           this.commonService.presentToast("Product Image Uploaded");
         });
       })
     })
 
+  }
+
+  setFeaturedProd(prod) {
+    this.fs.collection("Products").doc(prod.id).update({ setFeatured: true }).then(() => {
+      this.fs.collection("Sellers").doc(prod.storeId).get().subscribe(snap => {
+        if (snap.data().featuredProduct) {
+          this.fs.collection("Products").doc(snap.data().featuredProduct).update({ setFeatured: false }).then(() => {
+            this.fs.collection("Sellers").doc(prod.storeId).update({ featuredProduct: prod.id }).then(() => {
+              this.commonService.presentToast(prod.name + " is set as a featured product");
+            })
+          })
+        } else {
+          this.fs.collection("Sellers").doc(prod.storeId).update({ featuredProduct: prod.id }).then(() => {
+            this.commonService.presentToast(prod.name + " is set as a featured product");
+          })
+
+        }
+
+
+      })
+    })
   }
 
 

@@ -59,6 +59,31 @@ export class InventoryComponent implements OnInit {
   }
 
 
+  async confirmFeat(prodId, prodData) {
+    let temp = prodData;
+    temp.id = prodId;
+    const alert = await this.alertCtrl.create({
+      header: "Set " + temp.name + " as featured product ? ",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Set Featured',
+          handler: data => {
+            this.prodService.setFeaturedProd(temp)
+            this.alertCtrl.dismiss();
+          }
+        }
+      ]
+    });
+    return await alert.present();
+
+  }
+
+
 
   gtAddProduct() {
     this.navCtrl.navigateForward(`/add-product`);

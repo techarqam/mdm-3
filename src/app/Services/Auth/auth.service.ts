@@ -74,8 +74,9 @@ export class AuthService {
     ])),
 
     bannerImage: new FormControl(""),
-    totalProfits: new FormControl(0),
     dueProfits: new FormControl(0),
+    totalProfits: new FormControl(0),
+    featuredProduct: new FormControl(""),
     timeStamp: new FormControl(moment().format())
   });
 
@@ -119,7 +120,7 @@ export class AuthService {
               .then(() => {
                 this.firestore.collection("AdminNotifications").add({
                   head: "New Vendor Sign up",
-                  body: data.storeName + "has signed up as a Vendor. Initiate the verification procedure.",
+                  body: data.storeName + " has signed up as a Vendor. Initiate the verification procedure.",
                   status: "Unread",
                   timestamp: moment().format()
                 })

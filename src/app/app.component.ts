@@ -11,6 +11,7 @@ import { OrdersService } from './Services/Orders/orders.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  pOrders: number = 20;
   public appPages = [
     {
       title: 'Dashboard',
@@ -25,7 +26,8 @@ export class AppComponent {
     {
       title: 'Orders',
       url: '/orders',
-      icon: 'cart'
+      icon: 'cart',
+      notis: this.pOrders,
     },
     {
       title: 'Payments',
@@ -51,12 +53,12 @@ export class AppComponent {
   ];
 
   isMobile: boolean = false;
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private authService: AuthService,
     public alertController: AlertController,
+    public orderService: OrdersService,
     private statusBar: StatusBar,
     public navCtrl: NavController,
   ) {
@@ -66,6 +68,8 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) { this.isMobile = true; }
+      this.getPendingOrders();
+      this.pOrders++;
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -95,6 +99,17 @@ export class AppComponent {
     });
 
     await alert.present();
+  }
+  getPendingOrders() {
+    firebase.auth().onAuthStateChanged((user: firebase.User) => {
+      if (user) {
+        this.orderService.getStatusAOrdersinComps("Pending", user.uid).subscribe(snap => {
+          console.log(this.pOrders)
+          this.pOrders = snap.length + 3;
+          console.log(this.pOrders)
+        })
+      }
+    });
   }
 
 }

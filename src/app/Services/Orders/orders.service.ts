@@ -21,6 +21,9 @@ export class OrdersService {
   getStatusAOrders(status) {
     return this.db.collection("Orders", ref => ref.where("storeId", "==", firebase.auth().currentUser.uid).where("status", "==", status)).snapshotChanges()
   }
+  getStatusAOrdersinComps(status,id) {
+    return this.db.collection("Orders", ref => ref.where("storeId", "==", id).where("status", "==", status)).snapshotChanges()
+  }
   deliverOrder(id, data) {
     return this.db.collection("Orders").doc(id)
       .set({ status: "Completed" }, { merge: true })

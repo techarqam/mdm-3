@@ -37,9 +37,9 @@ export class EditProductComponent implements OnInit {
     this.prodService.getProduct(id).subscribe(snap => {
       this.product = snap.payload.data();
       this.product.id = snap.payload.id;
-      this.prodService.product.setValue(this.product);
       this.getCategories();
       this.getSubCat(this.product.category);
+      this.prodService.product.setValue(this.product);
     })
   }
 
@@ -50,6 +50,7 @@ export class EditProductComponent implements OnInit {
   getSubCat(cat) {
     this.showLoader = true;
     this.subCats = this.prodService.getSubCategories(cat);
+    this.prodService.product.patchValue({ subCategory: this.product.subCategory });
     this.subCats.subscribe(() => { this.showLoader = false });
   }
 

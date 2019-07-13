@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../Services/product/product.service';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,6 +23,7 @@ export class UploadMultipleImagesComponent implements OnInit {
     public prodService: ProductService,
     public navParams: NavParams,
     public modalCtrl: ModalController,
+    public alertCtrl: AlertController,
   ) {
     this.prodId = this.navParams.get('prodId');
     this.getProduct();
@@ -36,7 +37,48 @@ export class UploadMultipleImagesComponent implements OnInit {
     this.prodService.uploadProductImage(this.product, this.img2)
   }
 
+  async deleteImage(imgId) {
+    const alert = await this.alertCtrl.create({
+      header: "Delete Image  ?",
+      message: "This cannot be recovered !!",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Delete`',
+          handler: data => {
+            this.prodService.deleteImage(imgId, this.product.id);
+            this.alertCtrl.dismiss();
+          }
+        }
+      ]
+    });
+    return await alert.present();
+  }
+  async makePrimary(imgId, imageUrl) {
+    const alert = await this.alertCtrl.create({
+      header: "Make this image as primary ?",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Set Primary`',
+          handler: data => {
+            this.prodService.makeImagePrimary(imgId, this.product.id, imageUrl);
+            this.alertCtrl.dismiss();
+          }
+        }
+      ]
+    });
+    return await alert.present();
 
+  }
 
   getProduct() {
     this.prodService.getProduct(this.prodId).subscribe(snap => {

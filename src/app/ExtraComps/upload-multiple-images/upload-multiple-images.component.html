@@ -14,9 +14,9 @@
   <ion-grid>
     <ion-row>
 
-      <ion-col size="6" size-md="3">
+      <ion-col size="6" size-md="4">
 
-        <ion-card>
+        <ion-card class="upContainer">
           <label>
             <ion-input type="file" style="display: none;" (change)="fileChange($event)" accept="image/x-png,image/gif,image/jpeg"></ion-input>
             <div class="dumText">
@@ -27,10 +27,22 @@
         </ion-card>
       </ion-col>
 
-      <ion-col *ngFor="let m of images | async " size="6" size-md="3">
+      <ion-col *ngFor="let m of images | async " size="6" size-md="4">
         <ion-card class="imageCard">
           <ion-card-content>
-            <img [src]="m.payload.doc.data().imageUrl" />
+            <img [src]="m.payload.doc.data().imageUrl" class="prodImage" />
+            <ion-button fill="clear" *ngIf="!m.payload.doc.data().primaryImage" (click)="makePrimary(m.payload.doc.id,m.payload.doc.data().imageUrl)"
+              class="editBtns">
+              <ion-icon name="star-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" *ngIf="m.payload.doc.data().primaryImage" class="editBtns">
+              <ion-icon name="star"></ion-icon>
+            </ion-button>
+            <ion-item>
+              <ion-button slot="end" color="danger" fill="clear" *ngIf="!m.payload.doc.data().primaryImage" (click)="deleteImage(m.payload.doc.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
           </ion-card-content>
         </ion-card>
       </ion-col>

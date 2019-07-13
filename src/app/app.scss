@@ -21,3 +21,17 @@ h2 {
     color: white;
     font-weight: 600;
 }
+
+.noData {
+    text-align: center;
+
+    h2 {
+        color: grey;
+        font-size: 24px;
+    }
+
+    img {
+        width: 200px;
+        margin: auto;
+    }
+}
