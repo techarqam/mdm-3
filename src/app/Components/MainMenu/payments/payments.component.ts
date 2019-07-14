@@ -14,6 +14,7 @@ export class PaymentsComponent implements OnInit {
   store;
   transactions: Observable<any>;
   showLoader: boolean = true;
+  totData: number = 0;
 
   constructor(
     public paymentService: PaymentsService,
@@ -25,7 +26,7 @@ export class PaymentsComponent implements OnInit {
 
   ngOnInit() {
     this.transactions = this.paymentService.getTransactions()
-    this.transactions.subscribe(() => this.showLoader = false)
+    this.transactions.subscribe(snap => { this.showLoader = false; this.totData = snap.length; });
   }
   gtStore(t) {
     this.navCtrl.navigateForward(`/seller-details/${t.sellerId}`)

@@ -43,6 +43,7 @@ export class ProductService {
     storeId: new FormControl(""),
     storeName: new FormControl(""),
     primaryImage: new FormControl(""),
+    primaryImageId: new FormControl(""),
     setFeatured: new FormControl(false),
 
   })
@@ -218,7 +219,7 @@ export class ProductService {
   }
   async updateProduct(product) {
     return this.fs.collection("Products").doc(product.id)
-      .set(product, { merge: true }).then(() => {
+      .update(product).then(() => {
         this.commonService.presentToast("Product Updated")
       });
   }

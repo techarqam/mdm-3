@@ -14,12 +14,12 @@
 
               <ion-item>
                 <ion-label position="floating">Email</ion-label>
-                <ion-input type="email" formControlName="email"></ion-input>
+                <ion-input type="email" (keyup.enter)="onSubmit()" formControlName="email"></ion-input>
               </ion-item>
 
               <ion-item>
                 <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" formControlName="pass"></ion-input>
+                <ion-input type="password" (keyup.enter)="onSubmit()" formControlName="pass"></ion-input>
               </ion-item>
 
 

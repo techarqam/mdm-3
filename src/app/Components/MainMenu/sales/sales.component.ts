@@ -15,6 +15,7 @@ export class SalesComponent implements OnInit {
   products: Observable<any>;
   cats: Observable<any>;
   showLoader: boolean = true;
+  totProds: number = 0;
 
   constructor(
     private prodService: ProductService,
@@ -32,7 +33,7 @@ export class SalesComponent implements OnInit {
   getProducts() {
     this.showLoader = true;
     this.products = this.prodService.getColl();
-    this.products.subscribe(() => { this.showLoader = false });
+    this.products.subscribe(snap => { this.showLoader = false; this.totProds = snap.length; });
   }
   getCategories() {
     this.showLoader = true;

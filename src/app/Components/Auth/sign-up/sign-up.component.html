@@ -44,8 +44,8 @@
 
               <ion-item *ngIf="!img1">
                 <ion-label position="floating">Select Image</ion-label>
-                <ion-input type="file" (change)="fileChange($event)" class="select"
-                  accept="image/x-png,image/gif,image/jpeg" id="file-input" style="opacity: 0" #fileInp></ion-input>
+                <ion-input type="file" (change)="fileChange($event)" class="select" accept="image/x-png,image/gif,image/jpeg" id="file-input"
+                  style="opacity: 0" #fileInp></ion-input>
               </ion-item>
 
               <ion-item *ngIf="img1">
@@ -58,21 +58,18 @@
               </ion-item>
 
 
-              <ion-item>
-                <ion-button (click)="launchLocationPage()">Select Location</ion-button>
-              </ion-item>
+              <ion-button class="ion-margin-vertical" fill="clear" (click)="launchLocationPage()">Select Location</ion-button>
 
 
-
-              <ion-button class="ion-margin-top ion-margin-bottom " (click)="onSubmit()">Register</ion-button>
+              <div class="ion-text-center">
+                <ion-button class="ion-margin-vertical " (click)="onSubmit()">Register</ion-button>
+              </div>
 
 
 
             </form>
 
-            <ion-item>
-              <ion-button fill="clear" href="/login">Login as a Vendor</ion-button>
-            </ion-item>
+            <ion-button expand="full" class="ion-margin-vertical" fill="clear" href="/login">Login as a Vendor</ion-button>
 
 
           </ion-card-content>

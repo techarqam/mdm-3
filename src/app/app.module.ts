@@ -50,6 +50,7 @@ import { SetLocationComponent } from './ExtraComps/set-location/set-location.com
 import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
 import { PaymentsService } from './Services/Payments/payments.service';
 import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
+import { TermsComponent } from './ExtraComps/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.compon
     SetLocationComponent,
     PaymentsComponent,
     ChangePassComponent,
+    TermsComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,
@@ -86,6 +88,7 @@ import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.compon
     EditBannerComponent,
     UploadMultipleImagesComponent,
     SetLocationComponent,
+    TermsComponent,
   ],
   imports: [
     BrowserModule,

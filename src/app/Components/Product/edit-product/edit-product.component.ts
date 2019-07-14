@@ -64,6 +64,7 @@ export class EditProductComponent implements OnInit {
       let prod = this.prodService.product.value;
       prod.status = "Pending";
       this.prodService.updateProduct(prod).then(() => {
+        this.prodService.product.reset();
         this.navCtrl.navigateRoot('/inventory')
       })
     } else {

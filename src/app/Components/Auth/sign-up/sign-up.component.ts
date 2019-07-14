@@ -3,6 +3,7 @@ import { AuthService } from '../../../Services/Auth/auth.service';
 import { MenuController, NavController, ModalController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
 import { SetLocationComponent } from '../../../ExtraComps/set-location/set-location.component';
+import { TermsComponent } from '../../../ExtraComps/terms/terms.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -34,16 +35,19 @@ export class SignUpComponent implements OnInit {
     let data = this.authService.signUp.value;
     if (this.authService.signUp.valid) {
       if (this.img1) {
-        this.authService.signUpM(data, this.img2).then(res => {
-          this.authService.signUp.reset();
-        }).catch(err => {
-          this.commonService.presentToast(err.message);
-        })
-        // .then(() => {
-        //   if (this.authService.isLoggedIn()) {
-        //     this.navCtrl.navigateRoot('/dashboard');
-        //   }
-        // });
+
+        this.showTerms(data, this.img2);
+
+        // this.authService.signUpM(data, this.img2).then(res => {
+        //   this.authService.signUp.reset();
+        // }).catch(err => {
+        //   this.commonService.presentToast(err.message);
+        // })
+        //   .then(() => {
+        //     if (this.authService.isLoggedIn()) {
+        //       this.navCtrl.navigateRoot('/dashboard');
+        //     }
+        //   });
       } else {
         this.commonService.presentToast("Upload a banner image");
       }
@@ -73,6 +77,16 @@ export class SignUpComponent implements OnInit {
   async launchLocationPage() {
     const modal = await this.modalCtrl.create({
       component: SetLocationComponent,
+    });
+    return await modal.present();
+  }
+  async showTerms(data, image) {
+    const modal = await this.modalCtrl.create({
+      component: TermsComponent,
+      componentProps: {
+        data: data,
+        image: image,
+      }
     });
     return await modal.present();
   }

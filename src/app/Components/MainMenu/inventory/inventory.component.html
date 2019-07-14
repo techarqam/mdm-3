@@ -1,6 +1,17 @@
 <app-menu-header name="{{name}}"></app-menu-header>
 
-<ion-content>
+
+
+<ion-content [hidden]="totProds">
+    <div class="noData">
+        <img src="assets/imgs/noData.png" />
+        <h2>No Products</h2>
+    </div>
+
+</ion-content>
+
+<ion-content [hidden]="!totProds">
+
     <ion-grid>
         <ion-row>
             <ion-col size-md="2" offset-md="10" size="12" class="ion-float-right">
@@ -44,7 +55,6 @@
                         </ion-col> -->
                     </ion-row>
                     <app-loader *ngIf="showLoader"></app-loader>
-
                     <div class=" noBacki ">
                         <ion-row *ngFor="let p of products | async">
                             <ion-col size="12" size-md="1" *ngIf="p.payload.doc.data().status=='Verified'">

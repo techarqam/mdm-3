@@ -1,4 +1,5 @@
 <app-menu-header name="{{name}}"></app-menu-header>
+
 <ion-content>
 
     <ion-grid>
@@ -10,6 +11,7 @@
                         <ion-select formControlName="status" (ionChange)="filterOrder(this.orderService.orders.value.status)">
                             <ion-select-option value="">All</ion-select-option>
                             <ion-select-option value="Pending">Pending</ion-select-option>
+                            <ion-select-option value="Out for Delivery">Out for Delivery</ion-select-option>
                             <ion-select-option value="Completed">Completed</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -45,7 +47,13 @@
                     </ion-row>
                     <app-loader *ngIf="showLoader"></app-loader>
 
-                    <div class=" noBacki ">
+                    <div class="noData" [hidden]="totData">
+                        <img src="assets/imgs/noData.png" />
+                        <h2>No Orders yet..!!</h2>
+                    </div>
+
+
+                    <div class=" noBacki " [hidden]="!totData">
                         <ion-row *ngFor="let p of orders | async;let i = index;">
                             <ion-col size="12" size-md="1">
                                 <p ion-text color="grr" class="ion-text-center tableText ">{{i+1}}</p>
@@ -73,7 +81,7 @@
                                 <ion-button size="small" class="ion-text-center" *ngIf="p.payload.doc.data().status == 'Pending'" (click)="deliver(p.payload.doc.id,p.payload.doc.data())">
                                     <p class="btnClass">Deliver</p>
                                 </ion-button>
-                                <p ion-text color="grr" class="ion-text-center tableText rs " *ngIf="p.payload.doc.data().status == 'Completed'">Delivered</p>
+                                <p ion-text color="grr" class="ion-text-center tableText rs " *ngIf="p.payload.doc.data().status == 'Out for Delivery'">Out for Delivery</p>
                             </ion-col>
 
                         </ion-row>

@@ -1,6 +1,14 @@
 <app-menu-header name="{{name}}"></app-menu-header>
 
-<ion-content>
+<ion-content [hidden]="totProds">
+  <div class="noData">
+    <img src="assets/imgs/noData.png" />
+    <h2>No Products to sell</h2>
+  </div>
+
+</ion-content>
+
+<ion-content [hidden]="!totProds">
 
   <ion-grid>
     <ion-row>
@@ -45,12 +53,9 @@
 
           <div class=" noBacki ">
             <ion-row *ngFor="let p of products | async">
-              <ion-col size="12" size-md="1">
-                <!-- <ion-button fill="clear" *ngIf="p.featured && p.status=='Verified'" (click)="confirmFeat(p)">
-                                  <ion-icon name="star"></ion-icon>
-                              </ion-button> -->
-                <ion-button fill="clear" *ngIf="p.payload.doc.data().status=='Verified'">
-                  <ion-icon name="star-outline"></ion-icon>
+              <ion-col size="12" size-md="1" *ngIf="p.payload.doc.data().status=='Verified'">
+                <ion-button fill="clear" *ngIf="p.payload.doc.data().setFeatured">
+                  <ion-icon name="star"></ion-icon>
                 </ion-button>
               </ion-col>
               <ion-col size="12" size-md="3">

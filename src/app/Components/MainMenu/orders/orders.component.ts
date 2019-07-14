@@ -13,6 +13,7 @@ export class OrdersComponent implements OnInit {
   name: string = 'Orders';
   orders: Observable<any>;
   showLoader: boolean = true;
+  totData: number = 0;
 
   constructor(
     public orderService: OrdersService,
@@ -22,7 +23,9 @@ export class OrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.orderService.orders.patchValue({ status: "" })
+  }
 
 
   filterOrder(catId) {
@@ -36,13 +39,13 @@ export class OrdersComponent implements OnInit {
   getOrderBySatus(catId) {
     this.showLoader = true;
     this.orders = this.orderService.getStatusAOrders(catId);
-    this.orders.subscribe(() => { this.showLoader = false });
+    this.orders.subscribe(snap => { this.showLoader = false; this.totData = snap.length; });
   }
 
   getOrders() {
     this.showLoader = true;
     this.orders = this.orderService.getAllAOrders();
-    this.orders.subscribe(() => { this.showLoader = false });
+    this.orders.subscribe(snap => { this.showLoader = false; this.totData = snap.length; });
   }
 
   async deliver(id, data) {
@@ -60,9 +63,9 @@ export class OrdersComponent implements OnInit {
           text: 'Delivered',
           handler: () => {
             this.orderService.deliverOrder(id, data)
-            // .then(() => {
-            //   this.commonService.presentToast("Order Delivered");
-            // })
+              .then(() => {
+                this.commonService.presentToast("Order sent for Delivery");
+              })
             this.alertCtrl.dismiss();
           }
         }

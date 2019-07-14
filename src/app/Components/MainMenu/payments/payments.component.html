@@ -1,5 +1,13 @@
 <app-menu-header name="Payments"></app-menu-header>
-<ion-content>
+<ion-content [hidden]="totData">
+  <div class="noData">
+    <img src="assets/imgs/noData.png" />
+    <h2>No Transactions</h2>
+  </div>
+
+</ion-content>
+
+<ion-content [hidden]="!totData">
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="3">
@@ -45,7 +53,7 @@
 
           <div class=" noBacki ">
             <ion-row *ngFor="let t of transactions | async">
-              <ion-col size="12" size-md="4" class="ion-text-center" >
+              <ion-col size="12" size-md="4" class="ion-text-center">
                 <ion-button fill="clear" (click)="gtStore(t)">{{t.storeName | uppercase}}
                 </ion-button>
               </ion-col>
