@@ -26,6 +26,7 @@ export class TermsComponent implements OnInit {
 
 
   agree() {
+    this.modalCtrl.dismiss();
     this.authService.signUpM(this.data, this.image).then(res => {
       this.authService.signUp.reset();
     }).catch(err => {

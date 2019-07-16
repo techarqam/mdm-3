@@ -69,7 +69,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) { this.isMobile = true; }
       this.getPendingOrders();
-      this.pOrders++;
+      // this.pOrders++;
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
