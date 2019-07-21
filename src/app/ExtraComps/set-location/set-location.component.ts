@@ -3,6 +3,7 @@ import { NavController, Platform, ModalController } from '@ionic/angular';
 import { GoogleMapsService } from 'src/app/Services/Location/maps/GoogleMaps/google-maps.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CommonService } from 'src/app/Services/Common/common.service';
+import { Marker, MarkerOptions, GoogleMapsAnimation } from '@ionic-native/google-maps';
 declare var google: any
 
 @Component({
@@ -23,7 +24,10 @@ export class SetLocationComponent implements OnInit {
   searchDisabled: boolean;
   saveDisabled: boolean;
   location: any;
+  locMarker: any;
 
+  fMarkerLat: string;
+  fMarkerLng: string;
   constructor(
     public navCtrl: NavController,
     public zone: NgZone,
@@ -40,11 +44,9 @@ export class SetLocationComponent implements OnInit {
   ngOnInit(): void {
 
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
-
       this.autocompleteService = new google.maps.places.AutocompleteService();
       this.placesService = new google.maps.places.PlacesService(this.maps.map);
       this.searchDisabled = false;
-
     });
 
   }
@@ -69,6 +71,28 @@ export class SetLocationComponent implements OnInit {
         this.saveDisabled = false;
 
         this.maps.map.setCenter({ lat: location.lat, lng: location.lng });
+        let options: MarkerOptions = {
+          title: details.name,
+          position: { lat: location.lat, lng: location.lng },
+          draggable: true,
+          animation: GoogleMapsAnimation.DROP,
+        };
+
+        this.locMarker = new google.maps.Marker({
+          position: { lat: location.lat, lng: location.lng },
+          map: this.maps.map,
+          options: options,
+        });
+
+        let teoLat: string;
+        let teoLng: string;
+        google.maps.event.addListener(this.locMarker, 'dragend', function (event) {
+          teoLat = event.latLng.lat();
+          teoLng = event.latLng.lng();
+        })
+        // this.fMarkerLat = te;
+        // this.fMarkerLng = event.latLng.lng();
+
 
         this.location = location;
 
@@ -109,7 +133,9 @@ export class SetLocationComponent implements OnInit {
   }
 
   save() {
-    console.log(this.location)
+    console.log("Lat : ", this.fMarkerLat);
+    console.log("Lng : ", this.fMarkerLng);
+    // console.log(this.location)
     // this.modalCtrl.dismiss(this.location);
   }
 
