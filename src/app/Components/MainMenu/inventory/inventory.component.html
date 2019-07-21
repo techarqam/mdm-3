@@ -8,6 +8,14 @@
         <h2>No Products</h2>
     </div>
 
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="gtAddProduct()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+
+
 </ion-content>
 
 <ion-content [hidden]="!totProds">
@@ -115,7 +123,6 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-
 
 
 

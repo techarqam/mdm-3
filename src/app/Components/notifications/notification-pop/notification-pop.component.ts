@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../../../Services/Notifications/notifications.service';
-import { NavController, PopoverController } from '@ionic/angular';
+import { NavController, PopoverController, AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-notification-pop',
@@ -9,12 +10,15 @@ import { NavController, PopoverController } from '@ionic/angular';
 })
 export class NotificationPopComponent implements OnInit {
 
+
+  unReadNotis: Observable<any>;
   constructor(
     public notiService: NotificationsService,
     public popCtrl: PopoverController,
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
   ) {
-    this.getNotifications();
+    this.getUnreadNotifications();
   }
   async gtNotis() {
     this.navCtrl.navigateForward("/notifications").then(() => {
@@ -22,8 +26,13 @@ export class NotificationPopComponent implements OnInit {
     })
   }
   ngOnInit() { }
-  getNotifications() {
-    this.notiService.getNotifications();
+  getUnreadNotifications() {
+    this.unReadNotis = this.notiService.getUnreadNotifications()
+  }
+  viewSingleNotification(noti) {
+    let temp: any = noti.payload.doc.data();
+    temp.id = noti.payload.doc.id;
+    this.notiService.viewSingleNotification(temp);
   }
 
 }

@@ -1,11 +1,6 @@
 <ion-content>
   <ion-list>
-    <ion-item>Notification 1</ion-item>
-    <ion-item>Notification 2 </ion-item>
-    <ion-item>Notification 3 </ion-item>
-    <ion-item>Notification 4 </ion-item>
-    <ion-item>Notification 5 </ion-item>
-    <ion-item>Notification 6 </ion-item>
+    <ion-item (click)="viewSingleNotification(n)" *ngFor="let n of unReadNotis | async ">{{n.payload.doc.data().head}}</ion-item>
   </ion-list>
-  <ion-button expand="fill" (click)="gtNotis()" fill="clear">View All</ion-button>
+  <ion-button expand="full" (click)="gtNotis()" fill="clear">View All</ion-button>
 </ion-content>
