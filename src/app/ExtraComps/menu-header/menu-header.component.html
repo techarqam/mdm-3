@@ -14,7 +14,7 @@
 
       <ion-button shape="round" (click)="presentNotifications($ev)">
         <ion-icon name="notifications"></ion-icon>
-        <ion-badge fill=clear slot="end">2</ion-badge>
+        <ion-badge *ngIf="unReadNotis" fill=clear slot="end">{{unReadNotis}}</ion-badge>
       </ion-button>
 
 
