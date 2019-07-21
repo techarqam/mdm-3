@@ -15,11 +15,11 @@ export class NotificationsService {
   }
 
   getNotifications() {
-    return this.db.collection(`Sellers/${firebase.auth().currentUser.uid}/Notifications`).snapshotChanges();
+    return this.db.collection(`Sellers/${firebase.auth().currentUser.uid}/Notifications`, ref => ref.orderBy('timestamp','desc')).snapshotChanges();
   }
 
   getUnreadNotifications() {
-    return this.db.collection(`Sellers/${firebase.auth().currentUser.uid}/Notifications`, ref => ref.where("status", "==", "Unread")).snapshotChanges()
+    return this.db.collection(`Sellers/${firebase.auth().currentUser.uid}/Notifications`, ref => ref.where("status", "==", "Unread").orderBy('timestamp','desc')).snapshotChanges()
   }
 
   async viewSingleNotification(noti) {
