@@ -53,6 +53,8 @@
 
           <div class=" noBacki ">
             <ion-row *ngFor="let p of products | async">
+              <ion-col size="12" size-md="1" *ngIf="p.payload.doc.data().status! ='Verified'">
+              </ion-col>
               <ion-col size="12" size-md="1" *ngIf="p.payload.doc.data().status=='Verified'">
                 <ion-button fill="clear" *ngIf="p.payload.doc.data().setFeatured">
                   <ion-icon name="star"></ion-icon>
