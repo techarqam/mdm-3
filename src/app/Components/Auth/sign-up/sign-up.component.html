@@ -57,12 +57,20 @@
                 </div>
               </ion-item>
 
+              <ion-item *ngIf="this.authService.signUp.value.sellerLocationLat">
+                <p slot="start">Location</p>
+                <p slot="end">{{this.authService.signUp.value.sellerLocationLat}} ,
+                  <br/> {{this.authService.signUp.value.sellerLocationLng}}
+                </p>
+              </ion-item>
 
-              <ion-button class="ion-margin-vertical" fill="clear" (click)="launchLocationPage()">Select Location</ion-button>
+
+
+              <ion-button class="ion-margin-vertical" fill="clear" (click)="launchLocationPage()">{{locBtnText}}</ion-button>
 
 
               <div class="ion-text-center">
-                <ion-button class="ion-margin-vertical " (click)="onSubmit()">Register O</ion-button>
+                <ion-button class="ion-margin-vertical " (click)="onSubmit()">Register</ion-button>
               </div>
 
 

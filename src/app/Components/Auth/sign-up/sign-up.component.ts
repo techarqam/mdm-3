@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
   img1: any;
   img2: any;
 
-
+  locBtnText: string = "Select Location";
   constructor(
     private authService: AuthService,
     public menuCtrl: MenuController,
@@ -78,7 +78,10 @@ export class SignUpComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: SetLocationComponent,
     });
-    return await modal.present();
+    await modal.present();
+    const data = await modal.onWillDismiss()
+    this.authService.signUp.patchValue({ sellerLocationLat: data.data.location.lat, sellerLocationLng: data.data.location.lng })
+    this.locBtnText = "Change Location";
   }
   async showTerms(data, image) {
     const modal = await this.modalCtrl.create({

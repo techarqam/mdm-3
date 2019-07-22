@@ -3,7 +3,7 @@ import { NavController, Platform, ModalController } from '@ionic/angular';
 import { GoogleMapsService } from 'src/app/Services/Location/maps/GoogleMaps/google-maps.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CommonService } from 'src/app/Services/Common/common.service';
-import { Marker, MarkerOptions, GoogleMapsAnimation } from '@ionic-native/google-maps';
+import { Marker, MarkerOptions, GoogleMapsAnimation, GoogleMapsEvent } from '@ionic-native/google-maps';
 declare var google: any
 
 @Component({
@@ -71,6 +71,7 @@ export class SetLocationComponent implements OnInit {
         this.saveDisabled = false;
 
         this.maps.map.setCenter({ lat: location.lat, lng: location.lng });
+
         let options: MarkerOptions = {
           title: details.name,
           position: { lat: location.lat, lng: location.lng },
@@ -82,13 +83,12 @@ export class SetLocationComponent implements OnInit {
           position: { lat: location.lat, lng: location.lng },
           map: this.maps.map,
           options: options,
-        });
+        })
 
-        let teoLat: string;
-        let teoLng: string;
         google.maps.event.addListener(this.locMarker, 'dragend', function (event) {
-          teoLat = event.latLng.lat();
-          teoLng = event.latLng.lng();
+          location.lat = event.latLng.lat();
+          location.lng = event.latLng.lng();
+          console.log(location)
         })
         // this.fMarkerLat = te;
         // this.fMarkerLng = event.latLng.lng();
@@ -132,10 +132,14 @@ export class SetLocationComponent implements OnInit {
 
   }
 
-  save() {
-    console.log("Lat : ", this.fMarkerLat);
-    console.log("Lng : ", this.fMarkerLng);
+  save(lat, lng) {
     // console.log(this.location)
+
+    this.modalCtrl.dismiss({
+      'location': this.location
+    }).then(() => {
+      this.commonService.location.reset();
+    });
     // this.modalCtrl.dismiss(this.location);
   }
 

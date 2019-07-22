@@ -74,6 +74,8 @@ export class AuthService {
     ])),
 
     bannerImage: new FormControl(""),
+    sellerLocationLat: new FormControl("", Validators.required),
+    sellerLocationLng: new FormControl("", Validators.required),
     dueProfits: new FormControl(0),
     totalProfits: new FormControl(0),
     featuredProduct: new FormControl(""),
