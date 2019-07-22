@@ -77,7 +77,7 @@
                             <ion-col size="12" size-md="2">
                                 <p ion-text color="grr" class="ion-text-center tableText rs">Rs. {{p.payload.doc.data().vendorProfit | number: '1.0-0'}}</p>
                             </ion-col>
-                            <ion-col size="12" size-md="2" class="ion-text-center">
+                            <ion-col size="12" size-md="2" class="ion-text-center" *ngIf="p.payload.doc.data().paymentStatus=='success'">
                                 <ion-button size="small" class="ion-text-center" *ngIf="p.payload.doc.data().status == 'Pending'" (click)="deliver(p.payload.doc.id,p.payload.doc.data())">
                                     <p class="btnClass">Deliver</p>
                                 </ion-button>
@@ -85,6 +85,9 @@
                                 <ion-button size="small" class="ion-text-center" fill="clear" *ngIf="p.payload.doc.data().status == 'Completed'" (click)="details(p.payload.doc.id)">
                                     <p class="btnClass">Details</p>
                                 </ion-button>
+                            </ion-col>
+                            <ion-col size="12" size-md="2" class="ion-text-center" *ngIf="p.payload.doc.data().paymentStatus!='success'">
+                                <p ion-text color="grr" class="ion-text-center tableText rs "> Payment {{p.payload.doc.data().paymentStatus | titlecase}}</p>
                             </ion-col>
 
                         </ion-row>
