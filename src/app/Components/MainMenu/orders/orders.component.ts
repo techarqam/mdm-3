@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../../Services/Orders/orders.service';
 import { Observable } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { CommonService } from '../../../Services/Common/common.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class OrdersComponent implements OnInit {
   constructor(
     public orderService: OrdersService,
     public alertCtrl: AlertController,
+    public navCtrl: NavController,
     public commonService: CommonService,
   ) {
     this.getOrders();
@@ -75,4 +76,8 @@ export class OrdersComponent implements OnInit {
     await alert.present();
 
   }
+  details(orderId) {
+    this.navCtrl.navigateForward(`/order-details/${orderId}`)
+  }
+
 }

@@ -82,6 +82,9 @@
                                     <p class="btnClass">Deliver</p>
                                 </ion-button>
                                 <p ion-text color="grr" class="ion-text-center tableText rs " *ngIf="p.payload.doc.data().status == 'Out for Delivery'">Out for Delivery</p>
+                                <ion-button size="small" class="ion-text-center" fill="clear" *ngIf="p.payload.doc.data().status == 'Completed'" (click)="details(p.payload.doc.id)">
+                                    <p class="btnClass">Details</p>
+                                </ion-button>
                             </ion-col>
 
                         </ion-row>

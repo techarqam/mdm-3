@@ -51,6 +51,7 @@ import { PaymentsComponent } from './Components/MainMenu/payments/payments.compo
 import { PaymentsService } from './Services/Payments/payments.service';
 import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
 import { TermsComponent } from './ExtraComps/terms/terms.component';
+import { OrderDetailComponent } from './Components/Details/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { TermsComponent } from './ExtraComps/terms/terms.component';
     PaymentsComponent,
     ChangePassComponent,
     TermsComponent,
+    OrderDetailComponent,
   ],
   entryComponents: [
     MenuHeaderComponent,

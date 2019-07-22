@@ -21,6 +21,7 @@ import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-imag
 import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
 import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
 import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
+import { OrderDetailComponent } from './Components/Details/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,11 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: ChangePassComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'order-details/:id',
+    component: OrderDetailComponent,
     canActivate: [AuthGuard]
   },
 

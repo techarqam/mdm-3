@@ -24,6 +24,11 @@ export class OrdersService {
   getStatusAOrdersinComps(status, id) {
     return this.db.collection("Orders", ref => ref.where("storeId", "==", id).where("status", "==", status)).snapshotChanges()
   }
+
+  getSingleOrder(orderId) {
+    return this.db.collection("Orders").doc(orderId).snapshotChanges();
+  }
+
   deliverOrder(id, data) {
     return this.db.collection("Orders").doc(id)
       .set({ status: "Out for Delivery" }, { merge: true })
