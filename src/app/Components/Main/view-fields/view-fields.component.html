@@ -1,0 +1,238 @@
+<app-back-header name="{{master.masterName | titlecase}}"></app-back-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <!-- Slave Forms -->
+      <ion-col size="12" size-md="6">
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <!-- <ion-row>
+                <ion-col>
+                  <ion-button (click)="addField()" class="ion-float-end">Add Field</ion-button>
+                </ion-col>
+              </ion-row> -->
+              <ion-card-header>
+                <ion-card-title>
+                  {{master.masterName | titlecase}} Fields
+                </ion-card-title>
+              </ion-card-header>
+              <!-- <ion-card-content>
+                <form (ngSubmit)="onSubmit()" [formGroup]="mdmForm">
+                  <ion-item *ngFor="let question of questions">
+                    <ion-label [position]="posT">{{question.label}}</ion-label>
+                    <div style="width: 100%;" [ngSwitch]="question.controlType">
+                      <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                      </ion-input>
+
+                      <ion-select *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+                        <ion-select-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}
+                        </ion-select-option>
+                      </ion-select>
+
+                      <ion-textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" [id]="question.key">
+                      </ion-textarea>
+
+
+                      <ion-datetime *ngSwitchCase="'dateTime'" [displayFormat]="question.displayFormat" [pickerFormat]="question.pickerformat"
+                        [formControlName]="question.key" [id]="question.key">
+                      </ion-datetime>
+
+
+                      <ion-toggle *ngSwitchCase="'checkbox'" class="ion-float-right" [formControlName]="question.key" [checked]="question.value"
+                        color="primary"></ion-toggle>
+
+
+                    </div>
+                  </ion-item>
+                  <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Save</ion-button>
+                </form>
+
+              </ion-card-content> -->
+
+              <ion-card-content>
+                <ion-list>
+                  <ion-item *ngFor="let q of questions">
+                    <p slot="start">{{q.label}}</p>
+                    <ion-buttons slot="end">
+                      <ion-button fill="clear" color="primary" (click)="editField(q)">
+                        <ion-icon name="create"></ion-icon>
+                      </ion-button>
+                      <ion-button fill="clear" color="danger" (click)="delFieldConfirm(q)">
+                        <ion-icon name="trash"></ion-icon>
+                      </ion-button>
+
+                    </ion-buttons>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <!-- //Add Form -->
+
+      <ion-col size="12" size-md="6">
+        <!-- size-md="8" offset-md="2"> -->
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Add Fields for User
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+
+            <form [formGroup]="this.mainService.masterFieldType">
+
+              <ion-item>
+                <ion-label position="floating">Field Type</ion-label>
+                <ion-select (ionChange)="selectType(this.mainService.masterFieldType.value.controlType)" formControlName="controlType">
+                  <ion-select-option value="textbox">Textbox</ion-select-option>
+                  <ion-select-option value="number">Number</ion-select-option>
+                  <ion-select-option value="phone">Phone Number</ion-select-option>
+                  <ion-select-option value="email">Email</ion-select-option>
+                  <ion-select-option value="textarea">Textarea</ion-select-option>
+                  <ion-select-option value="timer">Timer</ion-select-option>
+                  <ion-select-option value="checker">Checkbox</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </form>
+
+          </ion-card-content>
+        </ion-card>
+
+
+
+        <form (ngSubmit)="saveSlave()" [hidden]="!this.mainService.masterFieldType.value.controlType" [formGroup]="this.mainService.masterField">
+
+          <ion-card>
+            <ion-card-content>
+
+              <ion-item>
+                <ion-label position="floating">Label</ion-label>
+                <ion-input type="text" formControlName="label">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Key</ion-label>
+                <ion-input type="text" formControlName="key" (ionChange)="checkDoc(this.mainService.masterField.value.key)">
+                </ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label slot="start">Required</ion-label>
+                <ion-toggle [checked]="this.mainService.masterField.value.required" slot="end" formControlName="required"></ion-toggle>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label position="floating">Column Width</ion-label>
+                <ion-input type="number" formControlName="columnWidth"></ion-input>
+              </ion-item>
+
+
+            </ion-card-content>
+          </ion-card>
+
+
+          <ion-button fill="clear" *ngIf="!showCustom" (click)="showCustom = true">Show Custom Fields</ion-button>
+          <ion-button fill="clear" *ngIf="showCustom" (click)="showCustom = false">Hide Custom Fields</ion-button>
+
+
+          <ion-card *ngIf="showCustom">
+            <ion-card-content>
+
+
+
+              <ion-item>
+                <ion-label position="floating">Control Type</ion-label>
+                <ion-input type="text" formControlName="controlType">
+                </ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label position="floating">Value</ion-label>
+                <ion-input type="text" formControlName="value">
+                </ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label position="floating">Max Length</ion-label>
+                <ion-input type="text" formControlName="maxLength">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Minimum Length</ion-label>
+                <ion-input type="text" formControlName="minLength">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Order</ion-label>
+                <ion-input type="text" formControlName="order">
+                </ion-input>
+              </ion-item>
+
+
+
+              <ion-item>
+                <ion-label position="floating">Pattern</ion-label>
+                <ion-input type="text" formControlName="pattern"></ion-input>
+              </ion-item>
+
+
+              <div *ngIf="this.mainService.masterFieldType.value.controlType == 'timer'">
+                <ion-item>
+                  <ion-label position="floating">Display Format</ion-label>
+                  <ion-input type="text" formControlName="displayFormat"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Picker Format</ion-label>
+                  <ion-input type="text" formControlName="pickerformat"></ion-input>
+                </ion-item>
+              </div>
+
+
+
+              <ion-item>
+                <ion-label position="floating">Type</ion-label>
+                <ion-select formControlName="fieldType">
+                  <ion-select-option value="text">Text</ion-select-option>
+                  <ion-select-option value="number">Number</ion-select-option>
+                  <ion-select-option value="password">Password</ion-select-option>
+                  <ion-select-option value="email">Email</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+            </ion-card-content>
+          </ion-card>
+          <ion-button expand="block" type="submit">Add Field</ion-button>
+
+
+
+
+
+        </form>
+      </ion-col>
+
+
+    </ion-row>
+
+
+
+
+
+
+  </ion-grid>
+</ion-content>

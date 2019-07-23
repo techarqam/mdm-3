@@ -1,38 +1,3 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay">
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>ALO Vendor</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item routerLinkActive="activeHighlight" [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-              <!-- <ion-badge slot="end">{{p.notis}}</ion-badge> -->
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-item routerLinkActive="activeHighlight" *ngIf="isMobile" [routerDirection]="'root'" routerLink="/barcode-scan">
-            <ion-icon slot="start" name="qr-scanner"></ion-icon>
-            <ion-label>
-              Scanner
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-      <ion-footer>
-        <ion-button color="danger" size="full" (click)="signOutConfirm()">Sign Out</ion-button>
-      </ion-footer>
-    </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
-  </ion-split-pane>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>
-<!-- <div *ngIf="!dataLength" class="noData">
-  <img src="assets/imgs/noData.png" />
-  <h2>No Products</h2>
-</div> -->

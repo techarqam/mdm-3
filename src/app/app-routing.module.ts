@@ -1,131 +1,37 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './Components/MainMenu/dashboard/dashboard.component';
-import { HelpComponent } from './Components/MainMenu/help/help.component';
-import { InventoryComponent } from './Components/MainMenu/inventory/inventory.component';
-import { OrdersComponent } from './Components/MainMenu/orders/orders.component';
-import { ProfileComponent } from './Components/MainMenu/profile/profile.component';
-import { SalesComponent } from './Components/MainMenu/sales/sales.component';
-import { LoginComponent } from './Components/Auth/login/login.component';
-import { SignUpComponent } from './Components/Auth/sign-up/sign-up.component';
-import { AddProductComponent } from './Components/Product/add-product/add-product.component';
-import { AuthGuard } from './Guards/Auth/auth.guard';
-import { NegAuthGuard } from './Guards/Auth/neg-auth.guard';
-import { NotificationComponent } from './Components/notifications/notification/notification.component';
-import { SettingsComponent } from './ExtraComps/settings/settings.component';
-import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
-import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
-import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
-import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
-import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
-import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
-import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
-import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
-import { OrderDetailComponent } from './Components/Details/order-detail/order-detail.component';
+import { ViewMastersComponent } from './Components/Main/view-masters/view-masters.component';
+import { ViewFieldsComponent } from './Components/Main/view-fields/view-fields.component';
+import { AddFieldsComponent } from './Components/Main/add-fields/add-fields.component';
+import { MdmOptionsComponent } from './Components/Main/mdm-options/mdm-options.component';
+import { SalveDataComponent } from './Components/Main/salve-data/salve-data.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'all-masters',
     pathMatch: 'full'
   },
-
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
+    path: 'all-masters',
+    component: ViewMastersComponent,
   },
   {
-    path: 'help',
-    component: HelpComponent,
-    canActivate: [AuthGuard]
+    path: 'add-fields',
+    component: AddFieldsComponent,
   },
   {
-    path: 'inventory',
-    component: InventoryComponent,
-    canActivate: [AuthGuard]
+    path: 'mdm-options/:mastername',
+    component: MdmOptionsComponent,
   },
   {
-    path: 'orders',
-    component: OrdersComponent,
-    canActivate: [AuthGuard]
+    path: 'slave-fields/:mastername',
+    component: ViewFieldsComponent,
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
+    path: 'slave-data/:mastername',
+    component: SalveDataComponent,
   },
-  {
-    path: 'sales',
-    component: SalesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [NegAuthGuard]
-  },
-  {
-    path: 'sign-up',
-    component: SignUpComponent,
-    canActivate: [NegAuthGuard]
-  },
-  {
-    path: 'add-product',
-    component: AddProductComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit-product/:id',
-    component: EditProductComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'product/barcode/:id',
-    component: BarcodeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'notifications',
-    component: NotificationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'barcode-scan',
-    component: BarcodeScannerComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'upload-images',
-    component: UploadMultipleImagesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'set-location',
-    component: SetLocationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'payments',
-    component: PaymentsComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'change-password',
-    component: ChangePassComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'order-details/:id',
-    component: OrderDetailComponent,
-    canActivate: [AuthGuard]
-  },
-
 ];
 
 @NgModule({

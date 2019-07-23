@@ -6,91 +6,52 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
-import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { firebaseConfig } from './firebaseConfig';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from "@angular/forms";
-import { DashboardComponent } from './Components/MainMenu/dashboard/dashboard.component';
-import { HelpComponent } from './Components/MainMenu/help/help.component';
-import { InventoryComponent } from './Components/MainMenu/inventory/inventory.component';
-import { OrdersComponent } from './Components/MainMenu/orders/orders.component';
-import { ProfileComponent } from './Components/MainMenu/profile/profile.component';
-import { SalesComponent } from './Components/MainMenu/sales/sales.component';
-import { AuthService } from './Services/Auth/auth.service';
-import { CommonService } from './Services/Common/common.service';
-import { LoginComponent } from './Components/Auth/login/login.component';
-import { SignUpComponent } from './Components/Auth/sign-up/sign-up.component';
-import { MenuHeaderComponent } from './ExtraComps/menu-header/menu-header.component';
 import { BackHeaderComponent } from './ExtraComps/back-header/back-header.component';
-import { LoaderComponent } from './ExtraComps/loader/loader.component';
-import { AddProductComponent } from './Components/Product/add-product/add-product.component';
-import { ProductService } from './Services/product/product.service';
-import { NotificationPopComponent } from './Components/notifications/notification-pop/notification-pop.component';
-import { NotificationComponent } from './Components/notifications/notification/notification.component';
-import { NotificationsService } from './Services/Notifications/notifications.service';
-import { OrdersService } from './Services/Orders/orders.service';
-import { SalesService } from './Services/Sales/sales.service';
-import { EditBannerComponent } from './Components/Profile/edit-banner/edit-banner.component';
-import { ProfileService } from './Services/Profile/profile.service';
-import { SettingsComponent } from './ExtraComps/settings/settings.component';
-import { EditProductComponent } from './Components/Product/edit-product/edit-product.component';
-import { BarcodeComponent } from './ExtraComps/barcode/barcode.component';
-import { BarcodeScannerComponent } from './ExtraComps/barcode-scanner/barcode-scanner.component';
-import { BarcodeScannerOriginal } from '@ionic-native/barcode-scanner';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { UploadMultipleImagesComponent } from './ExtraComps/upload-multiple-images/upload-multiple-images.component';
-import { GoogleMapsService } from './Services/Location/maps/GoogleMaps/google-maps.service';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { ConnectivityService } from './Services/Location/Connectivity/connectivity.service';
-import { SetLocationComponent } from './ExtraComps/set-location/set-location.component';
-import { PaymentsComponent } from './Components/MainMenu/payments/payments.component';
-import { PaymentsService } from './Services/Payments/payments.service';
-import { ChangePassComponent } from './ExtraComps/change-pass/change-pass.component';
-import { TermsComponent } from './ExtraComps/terms/terms.component';
-import { OrderDetailComponent } from './Components/Details/order-detail/order-detail.component';
-
+import { MainServiceService } from './Services/mainService/main-service.service';
+import { MainHeaderComponent } from './ExtraComps/main-header/main-header.component';
+import { ViewMastersComponent } from './Components/Main/view-masters/view-masters.component';
+import { AddMastersComponent } from './Components/Main/add-masters/add-masters.component';
+import { ViewFieldsComponent } from './Components/Main/view-fields/view-fields.component';
+import { AddFieldsComponent } from './Components/Main/add-fields/add-fields.component';
+import { ModalHeaderComponent } from './ExtraComps/modal-header/modal-header.component';
+import { CommonService } from './Services/commonService/common.service';
+import { MdmOptionsComponent } from './Components/Main/mdm-options/mdm-options.component';
+import { SalveDataComponent } from './Components/Main/salve-data/salve-data.component';
+import { AddSlaveComponent } from './Components/Main/SlaveComps/add-slave/add-slave.component';
+import { EditSlaveComponent } from './Components/Main/SlaveComps/edit-slave/edit-slave.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    HelpComponent,
-    InventoryComponent,
-    OrdersComponent,
-    ProfileComponent,
-    SalesComponent,
-    LoginComponent,
-    SignUpComponent,
-    MenuHeaderComponent,
+    // Main Components
+    ViewMastersComponent,
+    AddMastersComponent,
+    ViewFieldsComponent,
+    AddFieldsComponent,
+    MdmOptionsComponent,
+    SalveDataComponent,
+    //Slave Components
+    AddSlaveComponent,
+    EditSlaveComponent,
+    //Extra Components
     BackHeaderComponent,
-    LoaderComponent,
-    AddProductComponent,
-    NotificationComponent,
-    NotificationPopComponent,
-    EditBannerComponent,
-    SettingsComponent,
-    EditProductComponent,
-    BarcodeComponent,
-    BarcodeScannerComponent,
-    UploadMultipleImagesComponent,
-    SetLocationComponent,
-    PaymentsComponent,
-    ChangePassComponent,
-    TermsComponent,
-    OrderDetailComponent,
+    MainHeaderComponent,
+    ModalHeaderComponent,
   ],
   entryComponents: [
-    MenuHeaderComponent,
+    // Main Components
+    AddMastersComponent,
+    //Slave Components
+    AddSlaveComponent,
+    EditSlaveComponent,
+    //Extra Components
     BackHeaderComponent,
-    LoaderComponent,
-    NotificationPopComponent,
-    EditBannerComponent,
-    UploadMultipleImagesComponent,
-    SetLocationComponent,
-    TermsComponent,
+    MainHeaderComponent,
+    ModalHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,28 +59,15 @@ import { OrderDetailComponent } from './Components/Details/order-detail/order-de
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    NgxQRCodeModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    AuthService,
+    MainServiceService,
     CommonService,
-    ProductService,
-    NotificationsService,
-    OrdersService,
-    SalesService,
-    ProfileService,
-    PaymentsService,
-    //location
-    GoogleMapsService,
-    Geolocation,
-    Network,
-    ConnectivityService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    BarcodeScanner,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

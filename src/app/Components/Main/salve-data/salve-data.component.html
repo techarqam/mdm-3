@@ -1,0 +1,60 @@
+<app-back-header name="{{master.masterName | titlecase}}"></app-back-header>
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col>
+        <ion-button class="ion-float-end" (click)="addMaster()">
+          <ion-icon name="add" class="ion-margin-end"></ion-icon>
+          Add {{master.masterName | titlecase}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-content>
+
+            <ion-row class="tableTop wt">
+              <ion-col size="12" size-md="1">
+              </ion-col>
+              <ion-col size="12" size-md="2" *ngFor="let h of questions" [hidden]="!h.columnWidth">
+                <h2 ion-text text-md-center class="wt">{{h.label}}</h2>
+              </ion-col>
+              <ion-col size="12" size-md="2" class="ion-text-center">
+                Actions
+              </ion-col>
+            </ion-row>
+
+            <div class=" noBacki ">
+              <ion-row *ngFor="let d of slaveData;let i = index;">
+                <ion-col size="12" size-md="1">
+                  <p ion-text color="grr" class="ion-text-center tableText ">{{i+1}}</p>
+                </ion-col>
+
+                <ion-col size="12" size-md="2" *ngFor="let q of questions" [hidden]="!q.columnWidth">
+                  <p ion-text color="grr" class="ion-text-center tableText ">{{d[q.key]}}</p>
+                </ion-col>
+                <ion-col size="12" size-md="2" class="ion-text-center">
+                  <ion-button fill="clear" (click)="editSlave(d)">
+                    <ion-icon name="create"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger" (click)="delSlaveConfirm(d)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </div>
+
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
