@@ -23,7 +23,7 @@
                                     <ion-item *ngFor="let question of questions">
                                         <ion-label [position]="posT">{{question.label}}</ion-label>
                                         <div style="width: 100%;" [ngSwitch]="question.controlType">
-                                            <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                                            <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.fieldType">
                                             </ion-input>
 
                                             <ion-select *ngSwitchCase="'dropdown'" [formControlName]="question.key">
@@ -51,8 +51,10 @@
 
                                         </div>
                                     </ion-item>
-                                    <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Save</ion-button>
-                                    <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                    <div class="ion-margin-vertical">
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Save</ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                    </div>
                                 </form>
 
                             </ion-card-content>

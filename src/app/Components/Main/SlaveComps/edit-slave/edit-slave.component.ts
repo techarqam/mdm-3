@@ -83,7 +83,7 @@ export class EditSlaveComponent implements OnInit {
     console.log("this.mdmForm 2 :", this.mdmForm)
     let tt = this.slaveData;
     delete tt.id;
-    this.mdmForm.patchValue(this.slaveData)
+    // this.mdmForm.patchValue(this.slaveData)
   }
   close() {
     this.modalCtrl.dismiss();

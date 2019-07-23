@@ -98,7 +98,6 @@ export class SalveDataComponent implements OnInit {
 
 
   async editSlave(slaveData) {
-    console.log(slaveData)
     const modal = await this.modalCtrl.create({
       component: EditSlaveComponent,
       componentProps: {

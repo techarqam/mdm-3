@@ -51,8 +51,10 @@
 
                                         </div>
                                     </ion-item>
-                                    <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Update</ion-button>
-                                    <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                    <div class="ion-margin-vertical">
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Update</ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                    </div>
                                 </form>
 
                             </ion-card-content>
