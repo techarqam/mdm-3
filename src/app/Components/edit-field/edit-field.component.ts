@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { MainServiceService } from 'src/app/Services/mainService/main-service.service';
-import { CommonService } from '../../../Services/commonService/common.service';
 import { ModalController, NavParams } from '@ionic/angular';
-import { FieldTypesService } from '../../../Services/ExtraServices/FieldTypes/field-types.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-
+import { CommonService } from '../../Services/commonService/common.service';
+import { FieldTypesService } from '../../Services/ExtraServices/FieldTypes/field-types.service';
 
 @Component({
-  selector: 'app-add-fields',
-  templateUrl: './add-fields.component.html',
-  styleUrls: ['./add-fields.component.scss'],
+  selector: 'app-edit-field',
+  templateUrl: './edit-field.component.html',
+  styleUrls: ['./edit-field.component.scss'],
 })
-export class AddFieldsComponent implements OnInit {
+export class EditFieldComponent implements OnInit {
   masterCollection = this.navParams.get('masterCollection');
   // order = this.navParams.get('order');
 

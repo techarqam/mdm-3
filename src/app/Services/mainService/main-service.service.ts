@@ -31,7 +31,7 @@ export class MainServiceService {
     maxLength: new FormControl(""),
     minLength: new FormControl(""),
     pattern: new FormControl(""),
-    order: new FormControl("", Validators.required),
+    order: new FormControl(0, Validators.required),
     required: new FormControl(false),
     fieldType: new FormControl(""),
     value: new FormControl(""),
@@ -39,6 +39,7 @@ export class MainServiceService {
     pickerformat: new FormControl(""),
     timestamp: new FormControl(moment().format()),
     columnWidth: new FormControl(2),
+    id: new FormControl(""),
   });
 
 
@@ -90,7 +91,6 @@ export class MainServiceService {
   addField(fieldData, masterCollection) {
     return this.db.collection("Forms").doc(masterCollection).collection("Fields").doc(fieldData.key).set(fieldData)
   }
-
   delField(masterCollection, fieldId) {
     return this.db.collection("Forms").doc(masterCollection).collection("Fields").doc(fieldId).delete();
   }

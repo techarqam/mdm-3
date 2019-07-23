@@ -24,6 +24,7 @@ import { MdmOptionsComponent } from './Components/Main/mdm-options/mdm-options.c
 import { SalveDataComponent } from './Components/Main/salve-data/salve-data.component';
 import { AddSlaveComponent } from './Components/Main/SlaveComps/add-slave/add-slave.component';
 import { EditSlaveComponent } from './Components/Main/SlaveComps/edit-slave/edit-slave.component';
+import { EditFieldComponent } from './Components/edit-field/edit-field.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { EditSlaveComponent } from './Components/Main/SlaveComps/edit-slave/edit
     AddMastersComponent,
     ViewFieldsComponent,
     AddFieldsComponent,
+    EditFieldComponent,
     MdmOptionsComponent,
     SalveDataComponent,
     //Slave Components
@@ -47,6 +49,8 @@ import { EditSlaveComponent } from './Components/Main/SlaveComps/edit-slave/edit
     AddMastersComponent,
     //Slave Components
     AddSlaveComponent,
+    AddFieldsComponent,
+    EditFieldComponent,
     EditSlaveComponent,
     //Extra Components
     BackHeaderComponent,

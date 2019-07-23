@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { CommonService } from 'src/app/Services/commonService/common.service';
 import * as moment from 'moment';
 import { FieldTypesService } from '../../../Services/ExtraServices/FieldTypes/field-types.service';
+import { EditFieldComponent } from '../../edit-field/edit-field.component';
 
 @Component({
   selector: 'app-view-fields',
@@ -47,7 +48,6 @@ export class ViewFieldsComponent implements OnInit {
       this.getMaster(params['mastername']);
       this.getMasterFields(params['mastername']);
     });
-    // this.addField();
   }
   getMaster(masterCollection) {
     this.mainService.getSingleMaster(masterCollection).subscribe(snap => {
@@ -108,11 +108,6 @@ export class ViewFieldsComponent implements OnInit {
     await alert.present();
   }
 
-  editField(q) {
-    console.log(q);
-    this.mainService.masterFieldType.patchValue(q);
-    this.mainService.masterField.patchValue(q);
-  }
   saveSlave() {
     let temp = this.mainService.masterField.value;
     if (this.mainService.masterField.valid) {
@@ -126,5 +121,38 @@ export class ViewFieldsComponent implements OnInit {
       this.commonService.presentToast("Data Not Valid")
     }
   }
+
+
+  async addField() {
+    // console.log("asdasd")
+    const modal = await this.modalCtrl.create({
+      component: AddFieldsComponent,
+      componentProps: {
+        name: "Add " + this.master.masterName,
+        masterCollection: this.masterCollection
+      }
+    });
+    return await modal.present();
+  }
+  async editField(field) {
+    // console.log("asdasd")
+    this.mainService.masterFieldType.patchValue(field);
+    this.mainService.masterField.patchValue(field);
+
+
+    const modal = await this.modalCtrl.create({
+      component: EditFieldComponent,
+      componentProps: {
+        name: "Update " + this.master.masterName,
+        masterCollection: this.masterCollection
+      }
+    });
+    await modal.present();
+    modal.onDidDismiss().then(() => {
+      this.mainService.masterFieldType.reset();
+      this.mainService.masterField.reset();
+    })
+  }
+
 
 }
