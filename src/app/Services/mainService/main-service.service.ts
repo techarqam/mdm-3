@@ -80,10 +80,8 @@ export class MainServiceService {
   getSlaveData(masterCollection) {
     return this.db.collection(masterCollection).snapshotChanges();
   }
-  update(masterCollection, slaveData) {
-    let temp = slaveData;
-    delete temp.id;
-    return this.db.collection(masterCollection).doc(slaveData.id).update(temp);
+  updateSlaveData(masterCollection, slaveData, slaveId) {
+    return this.db.collection(masterCollection).doc(slaveId).update(slaveData);
   }
   delSlave(masterCollection, id) {
     return this.db.collection(masterCollection).doc(id).delete();

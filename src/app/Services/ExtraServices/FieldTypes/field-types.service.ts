@@ -46,6 +46,12 @@ export class FieldTypesService {
     controlType: "checkbox",
     value: false,
   }
+
+
+  picture: any = {
+    controlType: "picture",
+  }
+
   constructor(
     public mainService: MainServiceService,
   ) { }
@@ -68,6 +74,8 @@ export class FieldTypesService {
       case 'timer': this.mainService.masterField.patchValue(this.timer)
         break;
       case 'checker': this.mainService.masterField.patchValue(this.checker)
+        break;
+      case 'picture': this.mainService.masterField.patchValue(this.picture)
         break;
 
       default:

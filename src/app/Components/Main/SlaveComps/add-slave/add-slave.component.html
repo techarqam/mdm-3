@@ -20,28 +20,76 @@
                             </ion-card-header>
                             <ion-card-content>
                                 <form (ngSubmit)="onSubmit()" [formGroup]="mdmForm">
-                                    <ion-item *ngFor="let question of questions">
-                                        <ion-label [position]="posT">{{question.label}}</ion-label>
+
+
+
+                                    <div *ngFor="let question of questions">
                                         <div style="width: 100%;" [ngSwitch]="question.controlType">
-                                            <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.fieldType">
-                                            </ion-input>
 
-                                            <ion-select *ngSwitchCase="'dropdown'" [formControlName]="question.key">
-                                                <ion-select-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}
-                                                </ion-select-option>
-                                            </ion-select>
+                                            <ion-item *ngSwitchCase="'textbox'">
+                                                <ion-label [position]="posT">{{question.label}}</ion-label>
+                                                <ion-input [formControlName]="question.key" [id]="question.key"
+                                                    [type]="question.fieldType">
+                                                </ion-input>
+                                            </ion-item>
 
-                                            <ion-textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" [id]="question.key">
-                                            </ion-textarea>
+                                            <ion-item *ngSwitchCase="'dropdown'">
+                                                <ion-label [position]="posT">{{question.label}}</ion-label>
+                                                <ion-select [formControlName]="question.key">
+                                                    <ion-select-option *ngFor="let opt of question.options"
+                                                        [value]="opt.key">{{opt.value}}
+                                                    </ion-select-option>
+                                                </ion-select>
+                                            </ion-item>
+
+                                            <ion-item *ngSwitchCase="'textarea'">
+                                                <ion-label [position]="posT">{{question.label}}</ion-label>
+                                                <ion-textarea [formControlName]="question.key" [id]="question.key">
+                                                </ion-textarea>
+                                            </ion-item>
+
+                                            <ion-item *ngSwitchCase="'dateTime'">
+                                                <ion-label [position]="posT">{{question.label}}</ion-label>
+                                                <ion-datetime [displayFormat]="question.displayFormat"
+                                                    [pickerFormat]="question.pickerformat"
+                                                    [formControlName]="question.key" [id]="question.key">
+                                                </ion-datetime>
+                                            </ion-item>
+
+                                            <ion-item *ngSwitchCase="'checkbox'">
+                                                <ion-label slot="start">{{question.label}} </ion-label>
+                                                <ion-toggle slot="end" [formControlName]="question.key"
+                                                    [checked]="question.value" color="primary"></ion-toggle>
+                                            </ion-item>
+
+                                            <ion-card *ngSwitchCase="'picture'" class="upContainer">
+                                                <label>
+                                                    <ion-input type="file" style="display: none;"
+                                                        (change)="fileChange($event)"
+                                                        accept="image/x-png,image/gif,image/jpeg"></ion-input>
+                                                    <div class="dumText">
+                                                        <p class="add">+</p>
+                                                        <p class="selText">Select {{question.label}}</p>
+                                                    </div>
+                                                </label>
+                                            </ion-card>
+
+                                            <!-- <ion-item *ngIf="img1">
+                                                <img [src]="img1" class="imgView margin" />
+                                                <div class="editBtns">
+                                                    <ion-button class="btnTrash" color="danger" (click)="removeImage()">
+                                                        Remove
+                                                    </ion-button>
+                                                </div>
+                                            </ion-item> -->
 
 
-                                            <ion-datetime *ngSwitchCase="'dateTime'" [displayFormat]="question.displayFormat" [pickerFormat]="question.pickerformat"
-                                                [formControlName]="question.key" [id]="question.key">
-                                            </ion-datetime>
 
 
-                                            <ion-toggle *ngSwitchCase="'checkbox'" class="ion-float-right" [formControlName]="question.key" [checked]="question.value"
-                                                color="primary"></ion-toggle>
+
+
+
+
 
 
                                             <!-- Async validations  -->
@@ -50,10 +98,13 @@
                                       </div> -->
 
                                         </div>
-                                    </ion-item>
+                                    </div>
                                     <div class="ion-margin-vertical">
-                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Save</ion-button>
-                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">
+                                            Save
+                                        </ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light"
+                                            (click)="close()">Cancel</ion-button>
                                     </div>
                                 </form>
 

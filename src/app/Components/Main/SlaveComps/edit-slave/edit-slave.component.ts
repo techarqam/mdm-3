@@ -28,10 +28,8 @@ export class EditSlaveComponent implements OnInit {
     public commonService: CommonService,
     public fb: FormBuilder,
   ) {
-    console.log(this.masterCollection);
     this.getMaster(this.masterCollection);
     this.getMasterFields(this.masterCollection);
-    this.setSlaveValue();
   }
   getMaster(masterCollection) {
     this.mainService.getSingleMaster(masterCollection).subscribe(snap => {
@@ -40,9 +38,13 @@ export class EditSlaveComponent implements OnInit {
     })
   }
 
+  checkW(data) {
+    console.log(data)
+  }
+
+
   ngOnInit() { }
   getMasterFields(masterCollection) {
-    console.log("masterCollection :", masterCollection)
     let group: any = {};
     this.mainService.getMasterFields(masterCollection).subscribe(snap => {
       this.questions = snap;
@@ -57,34 +59,29 @@ export class EditSlaveComponent implements OnInit {
             new FormControl(question.value || '', Validators.compose(valArr))
             : new FormControl(question.value || '');
       });
+
+      // console.log(this.questions);
       group.timestamp = new FormControl(moment().format());
-      console.log("group :", group)
       this.mdmForm = this.fb.group(group);
-      console.log("this.mdmForm :", this.mdmForm)
-      console.log("questions  :", this.questions)
+      // console.log("before", this.mdmForm.value)
+      this.mdmForm.patchValue(this.slaveData)
+      // console.log("after", this.mdmForm.value)
     });
   }
   onSubmit() {
     let temp = this.mdmForm.value;
     console.log(temp);
-    // if (this.mdmForm.valid) {
-    //   this.mainService.addSlaveData(this.masterCollection, temp).then(() => {
-    //     this.close();
-    //     this.mdmForm.reset();
-    //     this.commonService.presentToast(this.master.masterName + "updated")
-    //   });
-    // } else {
-    //   this.commonService.presentToast("Try again");
-    // }
+    if (this.mdmForm.valid) {
+      this.mainService.updateSlaveData(this.masterCollection, temp, this.slaveData.id).then(() => {
+        this.close();
+        this.mdmForm.reset();
+        this.commonService.presentToast(this.master.masterName + " updated")
+      });
+    } else {
+      this.commonService.presentToast("Try again");
+    }
   }
 
-  setSlaveValue() {
-    console.log(this.slaveData)
-    console.log("this.mdmForm 2 :", this.mdmForm)
-    let tt = this.slaveData;
-    delete tt.id;
-    // this.mdmForm.patchValue(this.slaveData)
-  }
   close() {
     this.modalCtrl.dismiss();
   }

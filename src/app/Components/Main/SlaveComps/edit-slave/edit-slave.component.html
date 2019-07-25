@@ -23,25 +23,34 @@
                                     <ion-item *ngFor="let question of questions">
                                         <ion-label [position]="posT">{{question.label}}</ion-label>
                                         <div style="width: 100%;" [ngSwitch]="question.controlType">
-                                            <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                                            <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key"
+                                                [id]="question.key" [type]="question.type">
                                             </ion-input>
 
                                             <ion-select *ngSwitchCase="'dropdown'" [formControlName]="question.key">
-                                                <ion-select-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}
+                                                <ion-select-option *ngFor="let opt of question.options"
+                                                    [value]="opt.key">{{opt.value}}
                                                 </ion-select-option>
                                             </ion-select>
 
-                                            <ion-textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" [id]="question.key">
+                                            <ion-textarea *ngSwitchCase="'textarea'" [formControlName]="question.key"
+                                                [id]="question.key">
                                             </ion-textarea>
 
 
-                                            <ion-datetime *ngSwitchCase="'dateTime'" [displayFormat]="question.displayFormat" [pickerFormat]="question.pickerformat"
-                                                [formControlName]="question.key" [id]="question.key">
+                                            <ion-datetime *ngSwitchCase="'dateTime'"
+                                                [displayFormat]="question.displayFormat"
+                                                [pickerFormat]="question.pickerformat" [formControlName]="question.key"
+                                                [id]="question.key">
                                             </ion-datetime>
 
+                                            <!-- <p *ngSwitchCase="'checkbox'"> {{this.mdmForm.value.question.key | json}}
+                                            </p> -->
 
-                                            <ion-toggle *ngSwitchCase="'checkbox'" class="ion-float-right" [formControlName]="question.key" [checked]="question.value"
-                                                color="primary"></ion-toggle>
+                                            <ion-toggle *ngSwitchCase="'checkbox'" class="ion-float-right"
+                                                [formControlName]="question.key"
+                                                [checked]="this.mdmForm.value[question.key]" color="primary">
+                                            </ion-toggle>
 
 
                                             <!-- Async validations  -->
@@ -52,8 +61,10 @@
                                         </div>
                                     </ion-item>
                                     <div class="ion-margin-vertical">
-                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">Update</ion-button>
-                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light" (click)="close()">Cancel</ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" type="submit">
+                                            Update</ion-button>
+                                        <ion-button *ngIf="questions.length" class="ion-float-right" color="light"
+                                            (click)="close()">Cancel</ion-button>
                                     </div>
                                 </form>
 

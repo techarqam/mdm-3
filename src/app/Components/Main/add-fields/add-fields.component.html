@@ -14,7 +14,9 @@
             <form [formGroup]="this.mainService.masterFieldType">
               <ion-item>
                 <ion-label position="floating">Field Type</ion-label>
-                <ion-select (ionChange)="selectType(this.mainService.masterFieldType.value.controlType)" formControlName="controlType">
+                <ion-select (ionChange)="selectType(this.mainService.masterFieldType.value.controlType)"
+                  formControlName="controlType">
+                  <ion-select-option value="picture">Image</ion-select-option>
                   <ion-select-option value="textbox">Textbox</ion-select-option>
                   <ion-select-option value="number">Number</ion-select-option>
                   <ion-select-option value="phone">Phone Number</ion-select-option>
@@ -30,7 +32,8 @@
 
 
 
-        <form (ngSubmit)="saveSlave()" [hidden]="!this.mainService.masterFieldType.value.controlType" [formGroup]="this.mainService.masterField">
+        <form (ngSubmit)="saveSlave()" [hidden]="!this.mainService.masterFieldType.value.controlType"
+          [formGroup]="this.mainService.masterField">
 
           <ion-card>
             <ion-card-content>
@@ -43,14 +46,16 @@
 
               <ion-item>
                 <ion-label position="floating">Key</ion-label>
-                <ion-input type="text" formControlName="key" (ionChange)="checkDoc(this.mainService.masterField.value.key)">
+                <ion-input type="text" formControlName="key"
+                  (ionChange)="checkDoc(this.mainService.masterField.value.key)">
                 </ion-input>
               </ion-item>
 
 
               <ion-item>
                 <ion-label slot="start">Required</ion-label>
-                <ion-toggle [checked]="this.mainService.masterField.value.required" slot="end" formControlName="required"></ion-toggle>
+                <ion-toggle [checked]="this.mainService.masterField.value.required" slot="end"
+                  formControlName="required"></ion-toggle>
               </ion-item>
 
 
